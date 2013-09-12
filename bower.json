@@ -1,0 +1,19 @@
+{
+  "name": "stack-feedback",
+  "version": "0.0.1",
+  "description": "A feedback application server with embed code",
+  "license": "MIT",
+  "homepage": "feedback.stackvillage.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.0.x",
+    "angular": "~1.0.8"
+  }
+}
