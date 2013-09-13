@@ -17,7 +17,7 @@
 				<li><a href="#">About</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">login</a></li>
+				<li><a href="{{ URL::to('accounts/login') }}">login</a></li>
 				<li style="height: 20px; background-color:#CCC; width: 1px; margin-top: 1em;"></li>
 				<li><a href="{{ URL::to('accounts/signup') }}">sign up</a></li>
 			</ul>

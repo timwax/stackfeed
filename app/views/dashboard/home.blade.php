@@ -6,6 +6,6 @@
 
 @section('sidebar')
 	<div class="container">
-		<a href="#" class="btn btn-sm btn-block"><span class="glyphicon glyphicon-add"></span> New project</a>
+		<a href="#/projects/add" class="btn btn-sm btn-block"><span class="glyphicon glyphicon-add"></span> New project</a>
 	</div>
 @endsection

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
 	<title>Welcome to Stack Feedback</title>
 	<link rel="stylesheet" type="text/css" href="/packages/bootstrap/dist/css/bootstrap.css">
@@ -8,11 +8,12 @@
 <header>
 	<div class="navbar navbar-default">
 		<div class="navbar-brand">
-			<h1 style="font-size: 1em; margin:0; padding:0; font-weight: bold">stackFeedback</h1>
+			<a href="#/"><h1 style="font-size: 1em; margin:0; padding:0; font-weight: bold">stackFeedback</h1></a>
 		</div>
 		<div class="navbar-collapse collapse navbar-top-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="#">Projects</a></li>
+				<li><a href="#/">Dashboard</a></li>
+				<li><a href="#/projects">Projects</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">{{Auth::user()->username}}</a></li>
@@ -29,7 +30,7 @@
 			@yield('sidebar')
 		</div>
 		<div class="col-sm-6 push-sm-2">
-			@yield('content')
+			<div ng-view>@yield('content')</div>
 		</div>
 		</div>
 		
@@ -40,5 +41,14 @@
 		<div class="col-md-4">feedback.stackvillage.com &copy; 2013</div>
 	</div>
 </footer>
+
+<script type="text/javascript" src="/packages/angular/angular.js"></script>
+<script type="text/javascript" src="/packages/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="/dashboard/js/services.js"></script>
+<script type="text/javascript" src="/dashboard/js/filters.js"></script>
+<script type="text/javascript" src="/dashboard/js/controllers.js"></script>
+<script type="text/javascript" src="/dashboard/js/app.js"></script>
+
+
 </body>
 </html>

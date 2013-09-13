@@ -25,6 +25,12 @@ Route::group(['prefix' => 'accounts'], function(){
 		return View::make('accounts.sucess');
 	});
 
+	Route::get('logout', function(){
+		Auth::logout();
+
+		return Redirect::to('/');
+	});
+
 	Route::get('login', function(){
 		return View::make('accounts.login');
 	});
@@ -45,7 +51,7 @@ Route::group(['prefix' => 'accounts'], function(){
 		if(Auth::attempt($credentials)){
 			return Redirect::intended('home');
 		}else{
-			return Redirect::to('accounts/login')->with('message', 'Invalid username/password combination, try again');
+			return Redirect::to('accounts/login')->withErrors('Invalid username/password combination, try again');
 		}
 	});
 

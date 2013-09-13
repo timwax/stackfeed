@@ -11,6 +11,7 @@
 	</ul>
 </div>
 @endif
+
 <form method="POST" action="/accounts/login">
 	<p>
 		<label>Username</label>
