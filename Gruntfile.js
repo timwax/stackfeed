@@ -8,6 +8,15 @@ module.exports = function(grunt){
 				options: {
 					livereload: true
 				}
+			},
+			app: {
+				files: ['app/routes.php'],
+				options: {
+					livereload: true
+				}
+			},
+			gruntfile: {
+				files: ['Gruntfile.js']
 			}
 		}
 	});

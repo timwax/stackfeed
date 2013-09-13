@@ -12,20 +12,27 @@
 		</div>
 		<div class="navbar-collapse collapse navbar-top-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="#">Download</a></li>
-				<li><a href="#">Documentation</a></li>
-				<li><a href="#">About</a></li>
+				<li><a href="#">Projects</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">login</a></li>
+				<li><a href="#">{{Auth::user()->username}}</a></li>
 				<li style="height: 20px; background-color:#CCC; width: 1px; margin-top: 1em;"></li>
-				<li><a href="{{ URL::to('accounts/signup') }}">sign up</a></li>
+				<li><a href="{{ URL::to('accounts/logout') }}">
+				<span class="glyphicon glyphicon-logout"></span>logout</a></li>
 			</ul>
 		</div>
 	</div>
 </header>
 	<div class="container">
-		@yield('content')
+		<div class="row">
+		<div class="col-sm-4">
+			@yield('sidebar')
+		</div>
+		<div class="col-sm-6 push-sm-2">
+			@yield('content')
+		</div>
+		</div>
+		
 	</div>
 
 <footer>
