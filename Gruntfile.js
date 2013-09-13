@@ -31,18 +31,37 @@ module.exports = function(grunt){
 				options: {
 					livereload: true
 				}
+			},
+			compassSide: {
+				files: ['public/scss/**/*.scss'],
+				tasks: ['compass:dev'],
+				options: {
+					livereload: true
+				}
 			}
 
 		},
+		compass: {
+			dev: {
+				options: {
+					sassDir: 'public/scss',
+					cssDir: 'public/css'
+				}
+			}
+			
+		},
 		concat: {
-			options: {
-				separator: '\n\n'
-			},
 			controllers: {
+				options: {
+					banner: grunt.file.read('public/dashboard/js/app.js') + '\n\n'
+				},
 				src: ['public/dashboard/controllers/*.js'],
 				dest: 'public/dashboard/js/controllers.js'
 			},
 			services: {
+				options: {
+					banner: 'var services = angular.module(\'stack.feedback.services\', [\'ngResource\']); \n\n'
+				},
 				src: ['public/dashboard/services/*.js'],
 				dest: 'public/dashboard/js/services.js'
 			}
@@ -51,4 +70,5 @@ module.exports = function(grunt){
 
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-compass');
 }

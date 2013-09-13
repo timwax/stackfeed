@@ -1,0 +1,89 @@
+.feedback-cont{
+	background-color: #EEE;
+	color: #000;
+
+	.buttons{
+		button{
+			display: block;
+			width: 100%;
+		}
+	}
+	.feedback-body{
+		display: none;
+		border: 1px solid #CCC;
+		background-color: #FFF;
+
+
+		.help{ 
+			background-color: blue; 
+			color: #FFF; 
+			padding: 0 5px; 
+			font-weight: bold;
+		}
+		label{ 
+			width: 25%; 
+			float: left; 
+			display: block;
+		}
+		label.full{ 
+			display: block; 
+		}
+		
+		input{ width: 75%}
+		textarea{ width: 100%; min-height: 100px}
+	}
+}
+
+@media (min-width: 641px){
+
+	.feedback-cont{
+		position: fixed;
+		bottom: 0;
+		right: 3%;
+
+		.buttons{
+			position: absolute;
+			bottom:0;
+			right: 0;
+			height: 24px;
+
+			button{
+				height: 24px;
+				background-color:#CCC;
+				border: none;
+				width: 100%;
+			}
+		}
+
+		.feedback-body{
+			display: none;
+			position: absolute;
+			bottom: 24px;
+			right:0;
+			width: 600px;
+			height: 380px;
+			padding: 0 0.5em;
+			box-shadow: -1px 1px 2px #CCC;
+		}
+	}
+
+}
+@media (max-width: 640px){
+	.feedback-cont{
+		position: static;
+		bottom: none;
+		left: 0;
+		width: 100%;
+
+		.buttons{
+			position: static;
+		}
+
+		.feedback-body{
+			position: static;
+			bottom: none;
+			right: none;
+			width: 100%;
+		}
+	}
+}

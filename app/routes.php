@@ -108,3 +108,45 @@ Route::get('home', ['before' => 'auth' , function(){
 
 	return View::make('dashboard.home', $response);
 }]);
+
+Route::group(['prefix' => 'embed'], function(){
+	Route::get('feedback.php', function(){
+		return View::make('embed.feedback');
+	});
+});
+
+Route::post('fb.php', function(){
+	$rules = [
+		'message' => 'required',
+		'project' => 'required|exists:projects,public_id'
+	];
+
+	Log::debug('Requert', Input::all());
+
+	$v = Validator::make(Input::all(), $rules);
+
+	if ($v->fails()){
+		return Response::json([ 'message' => 'Sending feedback failed, try again later'], 449);
+	}
+
+	$message = new Message();
+
+	$message->content = Input::get('message');
+	$message->email = Input::get('email');
+	$message->fullName = Input::get('name');
+	$message->project_id = Input::get('project');
+	$message->ip = $_SERVER['REMOTE_ADDR'];
+
+	Log::debug('Message', $message->toArray());
+	if($message->save()){
+		// Saved OK
+
+		return Response::json(['message' => 'Message sent to team']);
+	}else{
+		return Response::json([ 'message' => 'Sending feedback failed, try again later'] , 500);
+	}
+});
+
+Route::group(['before' => 'auth', 'prefix' => 'api/v1'], function(){
+	Route::resource('projects', 'ProjectREST');
+});

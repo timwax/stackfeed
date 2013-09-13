@@ -1,5 +1,11 @@
-function ViewProjectCtrl($scope){
-	console.log('View Project Ctrl');
-};
+// app.controller('ViewProjectCtrl', [function($scope, Project){
+// 	Project.get({ id: 1 }, function(project){
+// 		$scope.project = project;
+// 	});
+// }]);
 
-ViewProjectCtrl.$inject = ['$scope'];
+app.controller('ViewProjectCtrl', ['$scope', 'Project', function($scope, Project){
+	Project.get({id: '1'}, function(project){
+		$scope.project = project;
+	});
+}])

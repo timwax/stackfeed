@@ -1,1 +1,7 @@
-Welcome projects.html
+<h3>Projects</h3>
+
+<ul class="projects">
+	<li ng-repeat="project in projects" class="project">
+		<a ng-href="#/projects/{{project.id}}">{{project.name}}
+	</li>
+</ul>

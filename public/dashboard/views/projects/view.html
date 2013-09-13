@@ -1,1 +1,22 @@
-View Project
+<h3>{{project.name}} <span title="Activated" ng-show="project.active" style="color: green" class="glyphicon glyphicon-ok-sign"></span></h3>
+<p>{{project.description}}</p>
+
+<label>Snipplet: </label> Copy in the head or body your webpage 
+<textarea style="min-height: 400px; width: 100%">
+<script type="text/javascript">
+	var _feedback = _feedback || {};
+	_feedback.project = '{{project.public_id}}';
+	_feedback.widgets = ['feedback'];
+	_feedback.host = window.location.host;
+	_feedback.label = 'Feedback';
+	_feedback.inline = ''
+
+	(function(){
+		var fb = document.createElement('script'); 
+		fb.type = 'text/javascript'; 
+		fb.async = true; 
+		fb.src = ('https:' == window.location.protocal ? 'https://' : 'http://') + _feedback.host +'/fb.js';
+		document.body.appendChild(fb);
+	})();
+</script>
+</textarea>

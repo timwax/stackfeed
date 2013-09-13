@@ -1,1 +1,23 @@
-Add Project
+<p>All fields with <span class="required">*</span> are required</p>
+<form name="newProject" ng-submit="save()">
+<p>
+	<label>Name <span class="required">*</span></label>
+	<input type="text" ng-model="project.name" required />
+</p>
+<p>
+	<label>Domain</label>
+	<input type="url" ng-model="project.domain"/>
+	<span class="example">e.g http://example.com</span>
+</p>
+<p>
+	<label>Description</label>
+	<textarea ng-model="project.description"></textarea>
+</p>
+
+<p>
+	<label>Active</label>
+	<input type="checkbox" ng-model="project.active" />
+</p>
+
+<button ng-disabled="newProject.$invalid">Save</button>
+</form>

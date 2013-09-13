@@ -47,7 +47,6 @@
 <script type="text/javascript" src="/dashboard/js/services.js"></script>
 <script type="text/javascript" src="/dashboard/js/filters.js"></script>
 <script type="text/javascript" src="/dashboard/js/controllers.js"></script>
-<script type="text/javascript" src="/dashboard/js/app.js"></script>
 
 
 </body>

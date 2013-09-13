@@ -1,0 +1,96 @@
+/* line 1, ../scss/app.scss */
+.feedback-cont {
+  background-color: #EEE;
+  color: #000;
+}
+/* line 6, ../scss/app.scss */
+.feedback-cont .buttons button {
+  display: block;
+  width: 100%;
+}
+/* line 11, ../scss/app.scss */
+.feedback-cont .feedback-body {
+  display: none;
+  border: 1px solid #CCC;
+  background-color: #FFF;
+}
+/* line 17, ../scss/app.scss */
+.feedback-cont .feedback-body .help {
+  background-color: blue;
+  color: #FFF;
+  padding: 0 5px;
+  font-weight: bold;
+}
+/* line 23, ../scss/app.scss */
+.feedback-cont .feedback-body label {
+  width: 25%;
+  float: left;
+  display: block;
+}
+/* line 28, ../scss/app.scss */
+.feedback-cont .feedback-body label.full {
+  display: block;
+}
+/* line 32, ../scss/app.scss */
+.feedback-cont .feedback-body input {
+  width: 75%;
+}
+/* line 33, ../scss/app.scss */
+.feedback-cont .feedback-body textarea {
+  width: 100%;
+  min-height: 100px;
+}
+
+@media (min-width: 641px) {
+  /* line 39, ../scss/app.scss */
+  .feedback-cont {
+    position: fixed;
+    bottom: 0;
+    right: 3%;
+  }
+  /* line 44, ../scss/app.scss */
+  .feedback-cont .buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 24px;
+  }
+  /* line 50, ../scss/app.scss */
+  .feedback-cont .buttons button {
+    height: 24px;
+    background-color: #CCC;
+    border: none;
+    width: 100%;
+  }
+  /* line 58, ../scss/app.scss */
+  .feedback-cont .feedback-body {
+    display: none;
+    position: absolute;
+    bottom: 24px;
+    right: 0;
+    width: 600px;
+    height: 380px;
+    padding: 0 0.5em;
+    box-shadow: -1px 1px 2px #CCC;
+  }
+}
+@media (max-width: 640px) {
+  /* line 72, ../scss/app.scss */
+  .feedback-cont {
+    position: static;
+    bottom: none;
+    left: 0;
+    width: 100%;
+  }
+  /* line 78, ../scss/app.scss */
+  .feedback-cont .buttons {
+    position: static;
+  }
+  /* line 82, ../scss/app.scss */
+  .feedback-cont .feedback-body {
+    position: static;
+    bottom: none;
+    right: none;
+    width: 100%;
+  }
+}

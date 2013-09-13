@@ -1,5 +1,3 @@
-function ProjectsCtrl($scope){
-	console.log('Init');
-};
-
-IndexCtrl.$inject = ['$scope'];
+app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project){
+	$scope.projects = Project.query();
+}]);

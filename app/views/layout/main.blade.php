@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>Welcome to Stack Feedback</title>
+	<meta name="viewpoint" content="width=device-width,initial-scale=1" />
 	<link rel="stylesheet" type="text/css" href="/packages/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/css/app.css">
 </head>
 <body>
 <header>
@@ -26,12 +28,34 @@
 </header>
 	<div class="container">
 		@yield('content')
+
+		<footer>
+			<div class="row">
+				<div class="col-md-4">feedback.stackvillage.com &copy; 2013</div>
+				<div class="col-md-8">&nbsp;</div>
+			</div>
+		</footer>
 	</div>
 
-<footer>
-	<div class="row">
-		<div class="col-md-4">feedback.stackvillage.com &copy; 2013</div>
-	</div>
-</footer>
+
+
+<style type="text/css">
+</style>
+<script type="text/javascript" src="/packages/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	var _feedback = _feedback || {};
+	_feedback.project = 'ZW9gqesevDRs';
+	_feedback.widgets = ['feedback'];
+	_feedback.host = 'localhost:8085';
+	_feedback.label = 'Feedback';
+
+	(function(){
+		var fb = document.createElement('script'); 
+		fb.type = 'text/javascript'; 
+		fb.async = true; 
+		fb.src = ('https:' == window.location.protocal ? 'https://' : 'http://') + _feedback.host +'/fb.js';
+		document.body.appendChild(fb);
+	})();
+</script>
 </body>
 </html>
