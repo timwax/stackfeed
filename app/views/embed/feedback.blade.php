@@ -81,7 +81,7 @@
 			_d.message = $('#message').val();
 			_d.name = $('#name').val();
 			_d.email = $('#email').val();
-			_d.project = window.top._feedback.project;
+			_d.project = "{{Input::get('pid')}}";
 
 			return _d;
 		}

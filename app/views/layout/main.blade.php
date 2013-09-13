@@ -44,10 +44,11 @@
 <script type="text/javascript" src="/packages/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 	var _feedback = _feedback || {};
-	_feedback.project = 'ZW9gqesevDRs';
+	_feedback.project = "{{Config::get('app.pid')}}";
 	_feedback.widgets = ['feedback'];
-	_feedback.host = 'localhost:8085';
+	_feedback.host = "{{Config::get('app.hostname')}}";
 	_feedback.label = 'Feedback';
+	_feedback.inline = '';
 
 	(function(){
 		var fb = document.createElement('script'); 

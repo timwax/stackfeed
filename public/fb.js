@@ -2,7 +2,7 @@ _feedback.inline = '';
 if (_feedback.maxWidth < 600) { _feedback.inline + '-inline'};
 
 var x = $('<iframe>');
-x.attr({'src': ('https:' == document.location.protocal ? 'https://': 'http://') + _feedback.host + '/embed/feedback.php'});
+x.attr({'src': ('https:' == document.location.protocal ? 'https://': 'http://') + _feedback.host + '/embed/feedback.php?pid=' + _feedback.project});
 console.log(x);
 x.attr({'width': '100%', 'frameborder': '0', height: '380px'});
 

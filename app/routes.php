@@ -129,12 +129,14 @@ Route::post('fb.php', function(){
 		return Response::json([ 'message' => 'Sending feedback failed, try again later'], 449);
 	}
 
+	$project = Project::where('public_id', '=', Input::get('project'))->first();
+
 	$message = new Message();
 
 	$message->content = Input::get('message');
 	$message->email = Input::get('email');
 	$message->fullName = Input::get('name');
-	$message->project_id = Input::get('project');
+	$message->project_id = $project->id;
 	$message->ip = $_SERVER['REMOTE_ADDR'];
 
 	Log::debug('Message', $message->toArray());
