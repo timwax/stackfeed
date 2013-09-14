@@ -1,6 +1,6 @@
 <div ng-include src="'/dashboard/views/partials/project-header.html'"></div>
 <ul>
 	<li ng-repeat="message in messages">
-		{{message.content}} - {{message.ip}}
+		<a ng-href="#/messages/{{message.id}}">{{message.content.substr(0, options.maxlen)}}<span ng-show="message.content.length > options.maxlen">...</span></a> - {{message.ip}}
 	</li>
 </ul>

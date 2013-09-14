@@ -1,4 +1,4 @@
-var app = angular.module('app', ['stack.feedback.services']);
+var app = angular.module('app', ['stack.feedback.services', 'stack.feedback.directives']);
 
 app.config(function($routeProvider){
 	$routeProvider
@@ -8,5 +8,6 @@ app.config(function($routeProvider){
 	.when('/projects/:id', { templateUrl: '/dashboard/views/projects/view.html', controller: 'ViewProjectCtrl' })
 	.when('/projects/:id/edit', { templateUrl: '/dashboard/views/projects/add.html', controller: 'EditProjectCtrl' })
 	.when('/projects/:id/messages', { templateUrl: '/dashboard/views/projects/messages.html', controller: 'ViewProjectMessagesCtrl' })
+	.when('/messages/:id', {templateUrl: '/dashboard/views/messages/view.html', controller: 'ViewMessageCtrl'})
 	.otherwise({redirectTo: '/'});
 });

@@ -42,11 +42,16 @@
 	</div>
 </footer>
 
+<div stack-notify></div>
+<script type="text/javascript" src="/packages/jquery/jquery.js"></script>
 <script type="text/javascript" src="/packages/angular/angular.js"></script>
+<script type="text/javascript" src="/packages/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="/packages/bootbox/bootbox.js"></script>
 <script type="text/javascript" src="/packages/angular-resource/angular-resource.js"></script>
 <script type="text/javascript" src="/dashboard/js/services.js"></script>
 <script type="text/javascript" src="/dashboard/js/filters.js"></script>
 <script type="text/javascript" src="/dashboard/js/controllers.js"></script>
+<script type="text/javascript" src="/dashboard/js/directives.js"></script>
 
 
 </body>

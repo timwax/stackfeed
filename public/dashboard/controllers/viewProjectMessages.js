@@ -5,5 +5,6 @@ app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages'
 		$scope.project = project;
 	});
 
+	$scope.options = { maxlen: 80 };
 	$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
 }]);

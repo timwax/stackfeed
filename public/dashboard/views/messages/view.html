@@ -1,0 +1,15 @@
+<div ng-include src="'/dashboard/views/partials/message-header.html'"></div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<strong>Posted: </strong> {{message.created_at}}
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<strong>Source: </strong> {{message.ip}} <span ng-show="message.fullName">&nbsp;&mdash;&nbsp;{{message.fullName}}</span>
+	</div>
+</div>
+
+<br />
+<p>{{message.content}}</p>

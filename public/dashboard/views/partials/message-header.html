@@ -1,0 +1,12 @@
+<div class="navbar navbar-default">
+<ul class="nav navbar-nav">
+	<li><a href="#/projects/{{message.project.id}}/messages" class="btn btn-sm">
+	<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back to messages</a></li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+	<li><a class="text-danger" stack-delete-message><span class="glyphicon glyphicon-trash"></span>&nbsp;delete</a></li>
+	<li ng-show="message.email"><a href="#"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;reply</a></li>
+	<li><a href="#"><span class="glyphicon glyphicon-pushpin"></span>&nbsp;pin</a></li>
+</ul>
+</div>

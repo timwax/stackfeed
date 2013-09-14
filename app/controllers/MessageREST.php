@@ -50,7 +50,26 @@ class MessageREST extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+
+		$message = Message::find($id);
+
+		if ($message->id){
+			// Load project
+
+			$project = Project::find($message->project_id);
+
+			// Check if one has access to project
+
+			if ($project->user_id == Auth::user()->id){
+				$response = $message->toArray();
+
+				$response['project'] = $project->toArray();
+
+				return Response::json($response);
+			}
+		}
+
+		return Response::make('', 403);
 	}
 
 	/**
@@ -83,7 +102,27 @@ class MessageREST extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$message = Message::find($id);
+
+		if ($message->id){
+			// Load project
+
+			$project = Project::find($message->project_id);
+
+			// Check if one has access to project
+
+			if ($project->user_id == Auth::user()->id){
+				if (Input::has('type') && Input::get('type') == 'forever'){
+					$message->forceDelete();
+				}else{
+					$message->delete();
+				}
+
+				return Response::json([]);
+			}
+		}
+
+		return Response::make('', 403);
 	}
 
 }

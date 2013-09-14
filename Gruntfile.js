@@ -25,6 +25,10 @@ module.exports = function(grunt){
 			angularServices: {
 				files: ['public/dashboard/services/*.js'],
 				tasks: ['concat:services'],
+			},			
+			angularDirectives: {
+				files: ['public/dashboard/directives/*.js'],
+				tasks: ['concat:directives'],
 			},
 			angularApp: {
 				files: ['public/dashboard/js/*.js', 'public/dashboard/views/**/*.html'],
@@ -67,6 +71,13 @@ module.exports = function(grunt){
 				},
 				src: ['public/dashboard/services/*.js'],
 				dest: 'public/dashboard/js/services.js'
+			},
+			directives: {
+				options: {
+					banner: 'var stack_directive = angular.module(\'stack.feedback.directives\', [\'ngResource\']); \n\n'
+				},
+				src: ['public/dashboard/directives/*.js'],
+				dest: 'public/dashboard/js/directives.js'
 			}
 		},
 		jshint: {
