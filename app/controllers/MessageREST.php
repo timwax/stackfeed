@@ -10,13 +10,13 @@ class MessageREST extends \BaseController {
 	public function index($pid)
 	{
 		$messages = [];
-		
+
 		// Verify project ownership
 
 		$project = Project::find($pid);
 
 		if (isset($project->id) && $project->user_id == Auth::user()->id){
-			$messages = Message::where('project_id', '=', $pid)->get();
+			$messages = Message::where('project_id', '=', $pid)->orderBy('created_at', 'DESC')->get();
 		}
 		
 		return Response::json($messages);
