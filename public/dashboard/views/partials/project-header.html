@@ -1,0 +1,12 @@
+<div class="navbar navbar-default" ng-show="project.id">
+	<div class="navbar-brand">
+		<h3 style="margin:0; padding:0; font-size: 1em;">
+			<a href="#/projects/{{project.id}}">{{project.name}}</a>&nbsp;&mdash;&nbsp;
+			<span title="Activated" ng-show="project.active" style="color: green" class="glyphicon glyphicon-ok-sign"></span>
+		</h3>
+	</div>
+	<ul class="nav navbar-nav navbar-right">
+		<li><a href="#/projects/{{project.id}}/messages">Messages <span class="label label-info" ng-show="project.messages > 0">{{project.messages}}</span></a></li>
+		<li><a href="#/projects/{{project.id}}/edit">Edit</a></li>
+	</ul>
+</div>

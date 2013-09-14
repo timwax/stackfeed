@@ -1,5 +1,14 @@
-function EditProjectCtrl($scope){
-	console.log('Init');
-};
+app.controller('EditProjectCtrl', ['$scope', 'Project','$route', function($scope, Project, $route){
+	$scope.project = {};
 
-EditProjectCtrl.$inject = ['$scope'];
+	Project.get({ id: $route.current.params.id }, function(project){
+		project.active = project.active == 1 ? true: false;
+		$scope.project = project;
+	});
+
+	$scope.save = function(){
+		$scope.project.$update(function(project){
+			$scope.project = project;
+		});
+	}
+}]);

@@ -151,4 +151,6 @@ Route::post('fb.php', function(){
 
 Route::group(['before' => 'auth', 'prefix' => 'api/v1'], function(){
 	Route::resource('projects', 'ProjectREST');
+	//Route::resource('messages', 'MessageREST');
+	Route::get('projects/{id}/messages', ['uses' => 'MessageREST@index']);
 });

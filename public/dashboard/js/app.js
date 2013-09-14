@@ -6,6 +6,7 @@ app.config(function($routeProvider){
 	.when('/projects', { templateUrl: '/dashboard/views/projects.html', controller: 'ProjectsCtrl' })
 	.when('/projects/add', { templateUrl: '/dashboard/views/projects/add.html', controller: 'AddProjectCtrl' })
 	.when('/projects/:id', { templateUrl: '/dashboard/views/projects/view.html', controller: 'ViewProjectCtrl' })
-	.when('/projects/:id/edit', { templateUrl: '/dashboard/views/projects/edit.html', controller: 'EditProjectCtrl' })
+	.when('/projects/:id/edit', { templateUrl: '/dashboard/views/projects/add.html', controller: 'EditProjectCtrl' })
+	.when('/projects/:id/messages', { templateUrl: '/dashboard/views/projects/messages.html', controller: 'ViewProjectMessagesCtrl' })
 	.otherwise({redirectTo: '/'});
 });

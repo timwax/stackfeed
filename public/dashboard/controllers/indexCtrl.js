@@ -1,5 +1,3 @@
-function IndexCtrl($scope){
-	console.log('Init');
-};
+app.controller('IndexCtrl', [function($scope){
 
-IndexCtrl.$inject = ['$scope'];
+}]);

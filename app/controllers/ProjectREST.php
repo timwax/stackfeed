@@ -57,7 +57,13 @@ class ProjectREST extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return Response::json(Project::find($id));
+		$messages = Message::where('project_id', '=', $id)->count(); // Cache this
+		$project = Project::find($id);
+
+		$response = $project->toArray();
+		$response['messages'] = $messages;
+
+		return Response::json($response);
 	}
 
 	/**
@@ -79,7 +85,16 @@ class ProjectREST extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$project = Project::find($id);
+
+		// Validate
+
+		$project->name = Input::get('name');
+		$project->description = Input::get('description');
+		$project->domain = Input::get('domain');
+		$project->active = Input::get('active');
+
+		if($project->save()) return Response::json($project->toArray());
 	}
 
 	/**

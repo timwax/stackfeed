@@ -51,6 +51,9 @@ module.exports = function(grunt){
 			
 		},
 		concat: {
+			options:{
+				separator: '\n\n'
+			},
 			controllers: {
 				options: {
 					banner: grunt.file.read('public/dashboard/js/app.js') + '\n\n'
@@ -65,10 +68,14 @@ module.exports = function(grunt){
 				src: ['public/dashboard/services/*.js'],
 				dest: 'public/dashboard/js/services.js'
 			}
+		},
+		jshint: {
+			files: ['public/dashboard/js/*.js']
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 }

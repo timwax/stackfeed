@@ -1,0 +1,6 @@
+<div ng-include src="'/dashboard/views/partials/project-header.html'"></div>
+<ul>
+	<li ng-repeat="message in messages">
+		{{message.content}} - {{message.ip}}
+	</li>
+</ul>
