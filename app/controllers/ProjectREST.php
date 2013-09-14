@@ -62,6 +62,7 @@ class ProjectREST extends \BaseController {
 
 		$response = $project->toArray();
 		$response['messages'] = $messages;
+		$response['host'] = Config::get('app.hostname');
 
 		return Response::json($response);
 	}
