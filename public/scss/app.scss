@@ -29,6 +29,7 @@ $body-display: none;
 
 	.feedback-body{
 		display: $body-display;
+		height: 350px;
 		
 		&.open{
 			border: 1px solid #CCC;
@@ -37,7 +38,7 @@ $body-display: none;
 		}
 
 		&.note{
-			height: 150px;
+			height: 160px;
 		}
 
 		.help{ 
@@ -103,6 +104,9 @@ $body-display: none;
 
 		.buttons{
 			position: static;
+			button{
+				display: block;
+			}
 		}
 
 		.feedback-body{

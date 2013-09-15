@@ -2,14 +2,16 @@
 <html lang="en_US">
 <head>
 	<title>Feedback</title>
+	<meta name="viewpoint" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/packages/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
 <style type="text/css">
-/*	body{
-		margin: 0;
-		padding: 1em;
+	body{
+		background-color: #FFF;
 		width: 100%;
-	}*/
+		margin-top: 10px;
+	}
 	
 	.alert{
 		display: none;
@@ -30,34 +32,58 @@
 	}
 	
 	.help{ background-color: blue; color: #FFF; padding: 0 5px; font-weight: bold;}
-	label{ width: 25%; float: left; display: block;}
-	label.full{ display: block; }
+	input[type=text], input[type=email]{
+		width: 100%;
+		padding: 0.3em;
+		font-size: 1em;
+	}
 	
-	input{ width: 74%}
-	textarea{ width: 100%; min-height: 100px}
+	textarea{
+		width: 100%;
+		min-height: 130px;
+	}
+
+	.br{
+		display: block;
+		height: 1px;
+		margin: 0.5em 0;
+	}
+
+	.poweredby{
+		margin-top: 1em;
+	}
 </style>
 <!-- Begin feedback -->
-<div style="width: 100%;">
-	<div class="alert alert-sucess">
-		<h3>Thank you for helping us out</h3>
+<div class="container">
+	<div class="alert alert-info">
+		<h3 style="margin:0; padding:0;">Thank you for helping us out</h3>
 		<p>Your feedback will be very helpfull in making the application as user friendly as possible</p>
 	</div>
 	<form id="feedback">
-		Feedback
-		<hr />
-		<p><label>Name( <em>optional</em> ):</label>
-			<input type="text" id="name" />
-		</p>
-		<p><label>Email( <em>optional</em> ) <span class="help" title="We all hate spam, plus we can say thanks if you are very helpful">?</span>:</label>
-			<input type="text" id="email" />
-		</p>
-		<p><label class="full">Message:</label>
-			<textarea placeholder="Be a critic and help us out" autofocus id="message">Testing message</textarea>
-		</p>
-		<hr />
+		<div class="row">
+			<div class="col-sm-4">Name <span class="text-muted">( optional )</span></div>
+			<div class="col-sm-8">
+				<input type="text" id="name" />
+			</div>
+		</div>		
+		<div class="br"></div>
+		<div class="row">
+			<div class="col-sm-4">Email <span class="text-muted">( optional )</span><span class="help" title="We all hate spam, plus we can say thanks if you are very helpful">?</span></div>
+			<div class="col-sm-8">
+				<input type="text" id="email" />
+			</div>
+		</div>		
+		<div class="br"></div>
+		<div class="row">
+			<div class="col-sm-12">
+				<textarea placeholder="Be a critic and help us out" autofocus id="message"></textarea>
+			</div>
+		</div>
+		<hr style="margin:1em 0;" />
 		<button class="btn btn-primary">Send</button>
-		<button>Cancel</button>
+		<button class="btn btn-secondary">Cancel</button>
 	</form>
+	<div class="poweredby">powered by <a href="http://{{Config::get('app.hostname')}}">stack feedback</a></div>
 </div>
 <!-- End feedback -->
 <script type="text/javascript" src="/packages/jquery/jquery.min.js"></script>
@@ -78,6 +104,10 @@
 			app.event('done', 'success');
 		}
 
+		function cancel(){
+			app.event('hide');
+		}
+
 		function processForm(){
 			var _d = {};
 
@@ -89,6 +119,11 @@
 			return _d;
 		}
 
+		$('body .btn-secondary').click(function(e){
+			e.preventDefault();
+			cancel();
+		});
+
 		$('body .btn-primary').click(function(e){
 			e.preventDefault();
 
@@ -98,18 +133,36 @@
 
 			$.post('/fb.php', _d, function(response, status, xhr){
 				if (status == 'success'){
-					console.log(response);
+					// console.log(response);
 					notify();
 				}
 			}, 'JSON');
 			
 		});
 
-		//notify();
+		// notify();
 		@if($status)
 			app.event('active', '1');
 		@endif;
+
+		$(window).on({
+			message: function(e){
+				// console.log('Yes', e);
+
+				if (e.originalEvent.origin != app.master) return;
+
+				// console.log('Its you master...');
+
+				switch(e.originalEvent.data.type){
+					case "refresh":
+						document.location.reload();
+					break;
+				}
+			}
+		})
 	});
+
+
 </script>
 </body>
 </html>

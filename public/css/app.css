@@ -25,65 +25,66 @@
 /* line 30, ../scss/app.scss */
 .feedback-cont .feedback-body {
   display: none;
+  height: 350px;
 }
-/* line 33, ../scss/app.scss */
+/* line 34, ../scss/app.scss */
 .feedback-cont .feedback-body.open {
   border: 1px solid #CCC;
   background-color: #FFF;
   border-radius: 0.5em 0.5em 0 0.5em;
 }
-/* line 39, ../scss/app.scss */
+/* line 40, ../scss/app.scss */
 .feedback-cont .feedback-body.note {
-  height: 150px;
+  height: 160px;
 }
-/* line 43, ../scss/app.scss */
+/* line 44, ../scss/app.scss */
 .feedback-cont .feedback-body .help {
   background-color: blue;
   color: #FFF;
   padding: 0 5px;
   font-weight: bold;
 }
-/* line 49, ../scss/app.scss */
+/* line 50, ../scss/app.scss */
 .feedback-cont .feedback-body label {
   width: 25%;
   float: left;
   display: block;
 }
-/* line 54, ../scss/app.scss */
+/* line 55, ../scss/app.scss */
 .feedback-cont .feedback-body label.full {
   display: block;
 }
-/* line 58, ../scss/app.scss */
+/* line 59, ../scss/app.scss */
 .feedback-cont .feedback-body input {
   width: 75%;
 }
-/* line 59, ../scss/app.scss */
+/* line 60, ../scss/app.scss */
 .feedback-cont .feedback-body textarea {
   width: 100%;
   min-height: 100px;
 }
 
 @media (min-width: 641px) {
-  /* line 65, ../scss/app.scss */
+  /* line 66, ../scss/app.scss */
   .feedback-cont {
     position: fixed;
     bottom: 0;
     right: 3%;
   }
-  /* line 70, ../scss/app.scss */
+  /* line 71, ../scss/app.scss */
   .feedback-cont .buttons {
     position: absolute;
     bottom: 0;
     right: 0;
     height: 28px;
   }
-  /* line 76, ../scss/app.scss */
+  /* line 77, ../scss/app.scss */
   .feedback-cont .buttons button {
     height: 28px;
     border: none;
     width: 100%;
   }
-  /* line 84, ../scss/app.scss */
+  /* line 85, ../scss/app.scss */
   .feedback-cont .feedback-body {
     display: none;
     position: absolute;
@@ -96,18 +97,22 @@
   }
 }
 @media (max-width: 640px) {
-  /* line 98, ../scss/app.scss */
+  /* line 99, ../scss/app.scss */
   .feedback-cont {
     position: static;
     bottom: none;
     left: 0;
     width: 100%;
   }
-  /* line 104, ../scss/app.scss */
+  /* line 105, ../scss/app.scss */
   .feedback-cont .buttons {
     position: static;
   }
-  /* line 108, ../scss/app.scss */
+  /* line 107, ../scss/app.scss */
+  .feedback-cont .buttons button {
+    display: block;
+  }
+  /* line 112, ../scss/app.scss */
   .feedback-cont .feedback-body {
     position: static;
     bottom: none;

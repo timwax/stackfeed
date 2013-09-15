@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Welcome to Stack Feedback</title>
 	<link rel="stylesheet" type="text/css" href="/packages/bootstrap/dist/css/bootstrap.css">
 </head>
