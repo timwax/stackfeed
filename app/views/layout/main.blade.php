@@ -47,16 +47,17 @@
 	_feedback.project = "{{Config::get('app.pid')}}";
 	_feedback.widgets = ['feedback'];
 	_feedback.host = "{{Config::get('app.hostname')}}";
+	_feedback.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
 	_feedback.label = 'Feedback';
 	_feedback.inline = '';
 
-	(function(){
+	{
 		var fb = document.createElement('script'); 
 		fb.type = 'text/javascript'; 
 		fb.async = true; 
-		fb.src = ('https:' == window.location.protocal ? 'https://' : 'http://') + _feedback.host +'/fb.js';
+		fb.src = _feedback.protocal + _feedback.host +'/fb.js';
 		document.body.appendChild(fb);
-	})();
+	}
 </script>
 </body>
 </html>

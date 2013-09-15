@@ -29,7 +29,7 @@ $body-display: none;
 
 	.feedback-body{
 		display: $body-display;
-		height: 350px;
+		height: auto;
 		
 		&.open{
 			border: 1px solid #CCC;
@@ -88,7 +88,7 @@ $body-display: none;
 			bottom: $button-height;
 			right:0;
 			width: 600px;
-			height: 380px;
+			// height: 380px;
 			padding: 0 0.5em;
 			box-shadow: -1px 1px 2px #CCC;
 		}

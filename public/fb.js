@@ -8,7 +8,7 @@ _feedback.hide = function(){
 
 var x = $('<iframe>');
 x.addClass('feedback-frame');
-x.attr({'src': ('https:' == document.location.protocal ? 'https://': 'http://') + _feedback.host + '/embed/feedback.php?pid=' + _feedback.project + '&origin=' + document.location.origin});
+x.attr({'src': _feedback.protocal + _feedback.host + '/embed/feedback.php?pid=' + _feedback.project + '&origin=' + document.location.origin});
 x.attr({'width': '100%', 'frameborder': '0', height: '380'});
 
 var b = $('<div>'); // Body
@@ -53,12 +53,12 @@ $('.feedback-cont .buttons button').bind('click', function(){
 // Setup receive messages using postMessage API
 
 window.addEventListener("message", function(e){
-	if(e.origin !== ('https:' == document.location.protocal ? 'https://' : 'http://') + _feedback.host ){
+	if(e.origin !== _feedback.protocal + _feedback.host ){
 		console.log('Bullshit');
 		return;
 	}
 
-	console.log(e.data);
+	// console.log(e.data);
 
 	if (e.data.type == 'done'){
 		$('.feedback-body').addClass('note');
@@ -71,7 +71,7 @@ window.addEventListener("message", function(e){
 			$('.buttons').addClass('rounded');
 			_feedback.status = 'closed';
 
-			e.source.postMessage({type: 'refresh'}, 'http://' + _feedback.host);
+			e.source.postMessage({type: 'refresh'}, _feedback.protocal + _feedback.host);
 		}, 4000);
 	}
 

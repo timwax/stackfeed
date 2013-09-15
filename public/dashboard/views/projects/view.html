@@ -1,22 +1,25 @@
 <div ng-include src="'/dashboard/views/partials/project-header.html'"></div>
 <p>{{project.description}}</p>
 
-<label>Snipplet: </label> Copy in the head or body your webpage 
+<label>Snipplet: </label> Copy to webpage body <em>( preffered at the end )</em><br />
+<label>Place inside an element: </label>
+<input type="text" ng-model="inline" placeholder="#some-div" style="margin-left: 1em; padding: 0 0.5em" />
 <textarea style="min-height: 400px; width: 100%">
 <script type="text/javascript">
 	var _feedback = _feedback || {};
 	_feedback.project = '{{project.public_id}}';
 	_feedback.widgets = ['feedback'];
 	_feedback.host = '{{project.host}}';
+	_feedback.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
 	_feedback.label = 'Feedback';
-	_feedback.inline = ''
+	_feedback.inline = '{{inline}}'
 
-	(function(){
+	{
 		var fb = document.createElement('script'); 
 		fb.type = 'text/javascript'; 
 		fb.async = true; 
-		fb.src = ('https:' == window.location.protocal ? 'https://' : 'http://') + _feedback.host +'/fb.js';
+		fb.src = _feedback.protocal + _feedback.host +'/fb.js';
 		document.body.appendChild(fb);
-	})();
+	}
 </script>
 </textarea>

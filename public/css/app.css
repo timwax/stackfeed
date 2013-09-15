@@ -25,7 +25,7 @@
 /* line 30, ../scss/app.scss */
 .feedback-cont .feedback-body {
   display: none;
-  height: 350px;
+  height: auto;
 }
 /* line 34, ../scss/app.scss */
 .feedback-cont .feedback-body.open {
@@ -91,7 +91,6 @@
     bottom: 28px;
     right: 0;
     width: 600px;
-    height: 380px;
     padding: 0 0.5em;
     box-shadow: -1px 1px 2px #CCC;
   }
