@@ -31,7 +31,7 @@ module.exports = function(grunt){
 				tasks: ['concat:directives'],
 			},
 			angularApp: {
-				files: ['public/dashboard/js/*.js', 'public/dashboard/views/**/*.html'],
+				files: ['public/dashboard/js/*.js', 'public/dashboard/views/**/*.html', 'public/fb.js'],
 				options: {
 					livereload: true
 				}

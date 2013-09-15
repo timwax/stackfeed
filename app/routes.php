@@ -111,7 +111,12 @@ Route::get('home', ['before' => 'auth' , function(){
 
 Route::group(['prefix' => 'embed'], function(){
 	Route::get('feedback.php', function(){
-		return View::make('embed.feedback');
+		Log::debug('Input: ', Input::all());
+		$project = Project::where('public_id', '=', Input::get('pid'))->first();
+
+		if (!isset($project->id) || !$project->active ) return Response::make('');
+
+		return View::make('embed.feedback', ['status' => '1']);
 	});
 });
 

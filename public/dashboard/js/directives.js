@@ -10,7 +10,6 @@ stack_directive.directive('stackDeleteMessage', function($rootScope){
 				e.preventDefault();
 
 				var msg = element.scope().message;
-
 				bootbox.confirm('Are you sure?', function(result){
 					if(result){
 						element.scope().message.$delete(function(response){

@@ -62,17 +62,20 @@
 <!-- End feedback -->
 <script type="text/javascript" src="/packages/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+	var app = {
+		master: "{{Input::get('origin')}}",
+		event: function(type, message){
+			window.top.postMessage({type: type, message: message}, this.master);
+		}
+	};
+
 	$(document).ready(function(){
-		var done = function (){
-			
-			var t = setTimeout();window.top.$('.feedback-body').hide();
-		};
 
 		function notify(){
 			$('#feedback').hide();
 			$('.alert').show();
 
-			setTimeout(done, 3000);
+			app.event('done', 'success');
 		}
 
 		function processForm(){
@@ -101,6 +104,11 @@
 			}, 'JSON');
 			
 		});
+
+		//notify();
+		@if($status)
+			app.event('active', '1');
+		@endif;
 	});
 </script>
 </body>

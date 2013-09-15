@@ -1,18 +1,44 @@
+$button-height: 28px;
+$button-background-color: #333;
+$button-color: #FFF;
+$button-background: $button-color;
+$body-display: none;
+
 .feedback-cont{
 	background-color: #EEE;
 	color: #000;
+	display: none;
 
 	.buttons{
+		padding: 0 0.5em;
+		background-color: $button-background-color;
+
+		&.rounded{
+			border-radius: 0.5em 0.5em 0 0;
+		}
+
 		button{
 			display: block;
 			width: 100%;
+			height: 32px;
+			padding: 0 1.5em;
+			background-color: $button-background-color;
+			color: $button-color;
 		}
 	}
-	.feedback-body{
-		display: none;
-		border: 1px solid #CCC;
-		background-color: #FFF;
 
+	.feedback-body{
+		display: $body-display;
+		
+		&.open{
+			border: 1px solid #CCC;
+			background-color: #FFF;
+			border-radius: 0.5em 0.5em 0 0.5em;
+		}
+
+		&.note{
+			height: 150px;
+		}
 
 		.help{ 
 			background-color: blue; 
@@ -45,20 +71,20 @@
 			position: absolute;
 			bottom:0;
 			right: 0;
-			height: 24px;
+			height: $button-height;
 
 			button{
-				height: 24px;
-				background-color:#CCC;
+				height: $button-height;
+				// background-color:#CCC;
 				border: none;
 				width: 100%;
 			}
 		}
 
 		.feedback-body{
-			display: none;
+			display: $body-display;
 			position: absolute;
-			bottom: 24px;
+			bottom: $button-height;
 			right:0;
 			width: 600px;
 			height: 380px;
