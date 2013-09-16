@@ -32,12 +32,11 @@
 		<footer>
 			<div class="row">
 				<div class="col-md-4">feedback.stackvillage.com &copy; 2013</div>
-				<div class="col-md-8">&nbsp;</div>
+				<div class="col-md-8"></div>
 			</div>
+			<div id="stack-feedback">&nbsp;</div>
 		</footer>
 	</div>
-
-
 
 <style type="text/css">
 </style>
@@ -49,7 +48,7 @@
 	_feedback.host = "{{Config::get('app.hostname')}}";
 	_feedback.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
 	_feedback.label = 'Feedback';
-	_feedback.inline = '';
+	_feedback.inline = '#stack-feedback';
 
 	{
 		var fb = document.createElement('script'); 

@@ -82,4 +82,32 @@ window.addEventListener("message", function(e){
 	if (e.data.type == 'hide'){
 		_feedback.hide();
 	}
+
+	if(e.data.type == 'init'){
+		// console.log('Ok leta go feedback');
+
+		e.source.postMessage({
+			type: "setup", 
+			message: {
+				uri: window.location.href,
+				screenWidth: window.screen.availWidth,
+				screenHeight: window.screen.availHeight,
+				docWidth: document.width, 
+				docHeight: document.height,
+				windowWidth: window.innerWidth > 0 ? window.innerWidth : screen.width,
+				windowHeight: window.innerHeight > 0 ? window.innerHeight : screen.height,
+
+				// Platform
+
+				platform: window.navigator.platform,
+				appCodeName: window.navigator.appCodeName,
+				appName: window.navigator.appName,
+				cookieEnabled: window.navigator.cookieEnabled,
+				language: window.navigator.language,
+				product: window.navigator.product,
+				vendor: window.navigator.vendor,
+				userAgent: window.navigator.userAgent
+			}
+		}, _feedback.protocal + _feedback.host);
+	}
 }, false);

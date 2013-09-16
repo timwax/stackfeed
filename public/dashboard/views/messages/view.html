@@ -13,3 +13,12 @@
 
 <br />
 <p>{{message.content}}</p>
+
+<div class="panel panel-default meta-cont">
+<div class="panel-heading">Device info</div>
+	<ul class="no-bullets">
+		<li ng-repeat="(title, meta) in message.meta">
+			{{title}} - <span class="label label-default">{{meta}}</span>
+		</li>
+	</ul>
+</div>

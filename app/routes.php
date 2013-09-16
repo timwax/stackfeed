@@ -143,6 +143,7 @@ Route::post('fb.php', function(){
 	$message->fullName = Input::get('name');
 	$message->project_id = $project->id;
 	$message->ip = $_SERVER['REMOTE_ADDR'];
+	$message->meta = json_encode(Input::get('meta'));
 
 	Log::debug('Message', $message->toArray());
 	if($message->save()){

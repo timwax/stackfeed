@@ -62,7 +62,7 @@ class MessageREST extends \BaseController {
 
 			if ($project->user_id == Auth::user()->id){
 				$response = $message->toArray();
-
+				$response['meta'] = json_decode($response['meta']);
 				$response['project'] = $project->toArray();
 
 				return Response::json($response);

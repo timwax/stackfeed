@@ -92,10 +92,34 @@
 		master: "{{Input::get('origin')}}",
 		event: function(type, message){
 			window.top.postMessage({type: type, message: message}, this.master);
-		}
+		},
+		meta: {}
 	};
 
 	$(document).ready(function(){
+
+		$(window).on({
+			message: function(e){
+				// console.log('Yes', e);
+
+				if (e.originalEvent.origin != app.master) return;
+
+				// console.log('Its you master...');
+
+				switch(e.originalEvent.data.type){
+					case "refresh":
+						document.location.reload();
+					break;
+
+					case "setup":
+						app.meta = e.originalEvent.data.message;
+						// console.log(app.meta);
+					break;
+				}
+			}
+		});
+
+		app.event('init', 'data');
 
 		function notify(){
 			$('#feedback').hide();
@@ -115,6 +139,7 @@
 			_d.name = $('#name').val();
 			_d.email = $('#email').val();
 			_d.project = "{{Input::get('pid')}}";
+			_d.meta = app.meta;
 
 			return _d;
 		}
@@ -145,24 +170,8 @@
 			app.event('active', '1');
 		@endif;
 
-		$(window).on({
-			message: function(e){
-				// console.log('Yes', e);
 
-				if (e.originalEvent.origin != app.master) return;
-
-				// console.log('Its you master...');
-
-				switch(e.originalEvent.data.type){
-					case "refresh":
-						document.location.reload();
-					break;
-				}
-			}
-		})
 	});
-
-
 </script>
 </body>
 </html>
