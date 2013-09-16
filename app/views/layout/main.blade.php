@@ -13,8 +13,13 @@
 <body>
 <header>
 	<div class="navbar navbar-default">
-		<div class="navbar-brand">
-			<h1 style="font-size: 1em; margin:0; padding:0; font-weight: bold">stackFeedback</h1>
+		<div class="navbar-brand" style="padding: 3px 0 3px 1em;">
+			<a href="/">
+				<img src="/img/logo.png" style="width: 48px;"> 
+				<span>
+					<h1 style="font-size: 1em; margin:0; padding:0; font-weight: bold; display: inline;"><span style="font-weight: normal;">stack</span> Feedback</h1>
+				</span>
+			</a>
 		</div>
 		<div class="navbar-collapse collapse navbar-top-collapse">
 			<ul class="nav navbar-nav">
