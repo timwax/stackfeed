@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome to Stack Feedback</title>
+	<title>
+	@if(isset($title) && $title != '')
+		{{ucfirst($title)}} - 
+	@endif
+	Stack feedback</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="/packages/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/app.css">

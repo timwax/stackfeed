@@ -4,7 +4,7 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		watch: {
 			templates: {
-				files: ['app/views/**/*.php'],
+				files: ['app/views/**/*.php', 'app/markdown/**/*.md'],
 				options: {
 					livereload: true
 				}

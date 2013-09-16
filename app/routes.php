@@ -160,3 +160,7 @@ Route::group(['before' => 'auth', 'prefix' => 'api/v1'], function(){
 	Route::resource('messages', 'MessageREST');
 	Route::get('projects/{id}/messages', ['uses' => 'MessageREST@index']);
 });
+
+Route::get('/p/{page}', function($page){
+	return View::make('pages.index', [ 'content' => Markdown::make($page), 'title' => $page ]);
+});
