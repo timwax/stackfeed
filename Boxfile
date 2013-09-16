@@ -11,6 +11,7 @@ web1:
   php_session_save_handler: redis
   php_session_save_path: "tcp://tunnel.pagodabox.com:6379"
   shared_writable_dirs:
+    - app/storage
     - app/storage/cache
     - app/storage/logs
     - app/storage/meta
