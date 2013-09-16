@@ -1,34 +1,38 @@
-Components
+[hosted]: awkward-alfreda.gopagoda.com "This is just a demo"
 
--Laravel 4.0.x
--Grunt
--Bower
+#Welcome to stackfeed
 
-Install Server
+[Demo][hosted]
 
-clone git repo
+###Components
 
-create database
+* Laravel 4.0.x
+* Grunt
+* Bower
 
-change configuration depending on the running environment
--production /app/config/database.php
--dev /app/config/local/database.php
+###Install
+1. `$ git clone git@github.com:timwax/stackfeed.git`
 
-*Laravel has a cool config system and making the app take local config change
-bootstrap/start.php
+2. Create database
 
-	$env = $app->detectEnvironment(array(
+3. Change configuration depending on the running environment
+	* production /app/config/database.php
+	* dev /app/config/local/database.php
+	* Laravel has a cool config system and making the app take local config change
+	bootstrap/start.php
 
-		'local' => array('machine-host-name'),
+			$env = $app->detectEnvironment(array(
 
-	));
+				'local' => array('machine-host-name'),
 
-to your running servers hostname
+			));
 
-on your command line
+	to your running servers hostname
 
-$ cd /to/your/repo/
-$ php artisan migrate
+4. on your command line
+
+* `$ cd /to/your/repo/`
+* `$ php artisan migrate`
 
 Then you are all set
 
@@ -36,6 +40,6 @@ Then you are all set
 
 If you are developing run
 
-$ grunt watch
+* `$ grunt watch`
 
 and it will compile the scss, compile javascript on file changes. Live reload can auto refresh browser for you

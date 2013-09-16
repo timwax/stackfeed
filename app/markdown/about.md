@@ -1,0 +1,1 @@
+Stack feedback is an application for web designers and developers to get feedback from users. This will result in more redifined products and is an open software.
