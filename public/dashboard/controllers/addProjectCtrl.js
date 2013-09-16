@@ -3,7 +3,7 @@ app.controller('AddProjectCtrl', ['$scope', '$location', 'Project', function ($s
 
 	$scope.save = function(){
 		$scope.project.$save(function(project){
-			$location.path = '/projects/' + project.id;
+			$location.path('/projects/' + project.id);
 		});
 	}
 }]);
