@@ -43,10 +43,21 @@ class MessageJobs{
 */
 	
 	public function onread($job, $data){
+		Log::debug('Starting onreadmessage: ', $data);
 		// Check read status
 		
+		if (!$data['message']['read']){
+			$job->delete();
+		}
+
+		Log::debug('Job continues');
 		// Update project new stats
 		
 		// Mark project as read
+
+		Message::where('id', '=', $data['message']['id'])
+		->update(array('read' => DB::raw('NOW()'), 'read_by' => Auth::user()->id));
+
+		$job->delete();
 	}
 }

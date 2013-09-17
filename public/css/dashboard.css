@@ -1,0 +1,27 @@
+/* line 1, ../scss/dashboard.scss */
+.project-messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 6, ../scss/dashboard.scss */
+.project-messages li {
+  padding: 0.3em;
+}
+/* line 9, ../scss/dashboard.scss */
+.project-messages li a {
+  font-weight: bold;
+}
+/* line 13, ../scss/dashboard.scss */
+.project-messages li:hover {
+  background-color: #EEE;
+}
+/* line 18, ../scss/dashboard.scss */
+.project-messages li.read {
+  color: grey;
+}
+/* line 21, ../scss/dashboard.scss */
+.project-messages li.read a {
+  color: inherit;
+  font-weight: normal;
+}

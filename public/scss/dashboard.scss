@@ -1,0 +1,26 @@
+.project-messages{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li{
+		padding: 0.3em;
+
+		a{
+			font-weight: bold;
+		}
+
+		&:hover{
+			background-color: #EEE;
+		}
+	}
+
+	li.read{
+		color: grey;
+
+		a{
+			color: inherit;
+			font-weight: normal;
+		}
+	}
+}

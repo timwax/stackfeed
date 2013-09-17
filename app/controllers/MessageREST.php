@@ -65,7 +65,7 @@ class MessageREST extends \BaseController {
 				$response['meta'] = json_decode($response['meta']);
 				$response['project'] = $project->toArray();
 				
-				Queue::push('MessageJobs@onread', array('message' => $message->toArray(), 'project' => $project->toArray());
+				Queue::push('MessageJobs@onread', array('message' => $message->toArray(), 'project' => $project->toArray()));
 				
 				return Response::json($response);
 			}
@@ -120,7 +120,7 @@ class MessageREST extends \BaseController {
 					$message->delete();
 				}
 	
-				Queue::job('MessageJobs@ondelete', array('message' => $message->toArray(), 'project' => $project->toArray());
+				Queue::job('MessageJobs@ondelete', array('message' => $message->toArray(), 'project' => $project->toArray()));
 				
 				return Response::json([]);
 			}
