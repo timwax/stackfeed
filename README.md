@@ -1,4 +1,4 @@
-[hosted]: awkward-alfreda.gopagoda.com "This is just a demo"
+[hosted]: http://awkward-alfreda.gopagoda.com "This is just a demo"
 
 #Welcome to stackfeed
 
