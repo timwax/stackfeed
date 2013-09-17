@@ -44,8 +44,13 @@ class ProjectREST extends \BaseController {
 
 		Log::debug('Create project', $project->toArray());
 
-		if($project->save())
+		if($project->save()){
+			// Call job
+			Queue::push('ProjectJobs@onadd', ['project' => $project->toArray()]);
+			
 			return Response::json($project->toArray());
+				
+		}
 
 	}
 
@@ -95,7 +100,10 @@ class ProjectREST extends \BaseController {
 		$project->domain = Input::get('domain');
 		$project->active = Input::get('active');
 
-		if($project->save()) return Response::json($project->toArray());
+		if($project->save()){
+			Queue::push('ProjectJobs@onedit', ['project' => $project->toArray()]);
+			return Response::json($project->toArray());
+		}
 	}
 
 	/**
@@ -106,7 +114,15 @@ class ProjectREST extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$project = Project::where('id', '=', $id)->where('user_id', '=', Auth::user()->id)->first();
+		
+		if (!isset($project->id)) return Response::json([]);
+		
+		if($project->delete()){
+			Queue::push('ProjectJobs@ondelete', ['project' => $project->toArray()]);
+			
+			return Response::json([]);
+		}
 	}
 
 }

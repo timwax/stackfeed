@@ -93,7 +93,8 @@ Route::group(['prefix' => 'accounts'], function(){
 
 		if ($user->save()){
 			// Create a verification job
-
+			Queue::push('UserJobs@onregister', array('user' => $user->toArray()));
+			
 			return Redirect::to('accounts/registration/success')->with($user->toArray());
 		}
 
@@ -148,7 +149,8 @@ Route::post('fb.php', function(){
 	Log::debug('Message', $message->toArray());
 	if($message->save()){
 		// Saved OK
-
+		Queue::push('MessageJobs@onadd', array('message' => $message->toArray(), 'project' => $project->toArray()));
+		
 		return Response::json(['message' => 'Message sent to team']);
 	}else{
 		return Response::json([ 'message' => 'Sending feedback failed, try again later'] , 500);
