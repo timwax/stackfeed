@@ -62,14 +62,13 @@ class ProjectREST extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$messages = Message::where('project_id', '=', $id)
-		->whereRaw('messages.read is null')
-		->count(); // Cache this
+		// $messages = Message::where('project_id', '=', $id)
+		// ->whereRaw('messages.read is null')
+		// ->count(); // Cache this
 
 		$project = Project::find($id);
 
 		$response = $project->toArray();
-		$response['messages'] = $messages;
 		$response['host'] = Config::get('app.hostname');
 
 		return Response::json($response);

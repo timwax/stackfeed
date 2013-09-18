@@ -44,9 +44,9 @@
 		<footer>
 			<div class="row">
 				<div class="col-md-4">feedback.stackvillage.com &copy; 2013</div>
-				<div class="col-md-8"></div>
+				<div class="col-md-8"><div id="stack-feedback"></div></div>
 			</div>
-			<div id="stack-feedback">&nbsp;</div>
+			
 		</footer>
 	</div>
 

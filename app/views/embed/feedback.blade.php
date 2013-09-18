@@ -91,7 +91,7 @@
 	var app = {
 		master: "{{Input::get('origin')}}",
 		event: function(type, message){
-			window.top.postMessage({type: type, message: message}, this.master);
+			window.parent.postMessage({type: type, message: message}, this.master);
 		},
 		meta: {}
 	};

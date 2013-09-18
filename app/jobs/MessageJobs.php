@@ -6,7 +6,8 @@ class MessageJobs{
 		Log::debug('Starting onaddmessage: ', $data);
 		
 		// Increment project stats count(new messages, total)
-		
+		$project = Project::where('id', '=', $data['project']['id'])->update(array('new_messages' => DB::raw('projects.new_messages + 1'), 'total_messages' => DB::raw('projects.total_messages + 1')));
+
 		// Add message to project messages cache
 		
 		// Add message to project search index
@@ -53,6 +54,7 @@ class MessageJobs{
 		Log::debug('Job continues');
 		// Update project new stats
 		
+		Project::where('id', '=', $data['project']['id'])->update(array('new_messages' => DB::raw('projects.new_messages - 1')));
 		// Mark project as read
 
 		Message::where('id', '=', $data['message']['id'])
