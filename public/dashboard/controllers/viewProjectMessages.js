@@ -1,4 +1,4 @@
-app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', function($scope, Project, ProjectMessages, $route){
+app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', function($scope, Project, ProjectMessages, $route, $routeParams){
 	$scope.project = {};
 
 	Project.get({id : $route.current.params.id }, function(project){

@@ -6,31 +6,8 @@ _feedback.hide = function(){
 	$('.buttons').addClass('rounded');
 }
 
-var x = $('<iframe>');
-x.addClass('feedback-frame');
-x.attr({'src': _feedback.protocal + _feedback.host + '/embed/feedback.php?pid=' + _feedback.project + '&origin=' + _feedback.protocal + window.location.host});
-x.attr({'width': '100%', 'frameborder': '0', height: '380'});
+_feedback.toggle = function(){
 
-var b = $('<div>'); // Body
-b.addClass('feedback-body');
-b.css({border: '#EEE 1px solid', display: 'none'});
-b.append(x);
-
-var c = $('<div>'); // Container
-
-c.addClass('feedback-cont');
-c.html('<div class="buttons rounded"><button class="btn btn-block btn-primary">'+ _feedback.label +'</button></div>');
-c.append(b);
-
-if (_feedback.inline != ''){
-	$(_feedback.inline).append(c);
-	// console.log(_feedback.inline);
-}else{
-	$(document.body).append(c);
-}
-
-
-$('.feedback-cont .buttons button').bind('click', function(){
 	var _b = $('.feedback-body');
 
 	if (_feedback.status == 'closed'){
@@ -45,11 +22,67 @@ $('.feedback-cont .buttons button').bind('click', function(){
 		_b.removeClass('open');
 		$('.buttons').addClass('rounded');
 	}else{
+		// Check if iframe is loaded
+		if(!_feedback.loaded) _feedback.load();
+
 		$('.buttons').removeClass('rounded');
 		_b.addClass('open');
 		_b.show();
 	}
-});
+};
+
+_feedback.load = function(){
+	console.log('Loading feedback iframe');
+
+	var x = $('<iframe>');
+	x.addClass('feedback-frame');
+	x.attr({'src': _feedback.protocal + _feedback.host + '/embed/feedback.php?pid=' + _feedback.project + '&origin=' + _feedback.protocal + window.location.host});
+	x.attr({'width': '100%', 'frameborder': '0', height: '380'});
+
+	// Append iframe to feedback body
+
+	$('.feedback-body').append(x);
+
+	// Setup loaded flag
+	_feedback.loaded = true;
+}
+
+var b = $('<div>'); // Body
+b.addClass('feedback-body');
+b.css({border: '#EEE 1px solid', display: 'none'});
+
+var c = $('<div>'); // Container
+
+c.addClass('feedback-cont');
+
+if (!_feedback.trigger || _feedback.trigger == 'default')
+	c.html('<div class="buttons rounded"><button class="btn btn-block btn-primary">'+ _feedback.label +'</button></div>');
+
+c.append(b);
+
+if (_feedback.context){
+	// Append widget to context area
+
+	$(_feedback.context).append(c);
+}else{
+	$(document.body).append(c);
+}
+
+// Feedback trigger handles events
+
+if(_feedback.trigger){
+
+	console.log('Setting up feedback trigger binding')
+	$(_feedback.trigger).bind('click', function(e){
+		e.preventDefault();
+
+		_feedback.toggle();
+	});
+}else{
+	$('.feedback-cont .buttons button').bind('click', _feedback.toggle);
+}
+
+
 
 // Setup receive messages using postMessage API
 
@@ -116,3 +149,7 @@ eventer(messageEvent, function(e){
 		}, _feedback.protocal + _feedback.host);
 	}
 }, false);
+
+// Check for preload and init iframe
+
+if(_feedback.preload) _feedback.load();

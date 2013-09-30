@@ -12,24 +12,31 @@ This is a feedback application/service for developers wanting real input from th
 
 		<script type="text/javascript">
 			var _feedback = _feedback || {};
-			_feedback.project = '__project_public_id__';
-			_feedback.widgets = ['feedback'];
-			_feedback.host = '192.168.0.104:8085';
-			_feedback.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
-			_feedback.label = 'Feedback';
-			_feedback.inline = ''
 
-			{
+			_feedback.project = "xxxxxxx";
+			_feedback.label = 'Feedback';
+			_feedback.host = "feedback.stackvillage.com";
+			_feedback.type = 'inline'; // Type can be either (inline, popup, docked|default)
+			_feedback.trigger = document.getElementById('feedback_trigger');
+			_feedback.preload = false;
+			_feedback.position = 'bottom-left';
+			_feedback.context = document.getElementById('stack-feedback');
+
+			_feedback.init = function(){
+				this.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
+
 				var fb = document.createElement('script'); 
 				fb.type = 'text/javascript'; 
 				fb.async = true; 
-				fb.src = _feedback.protocal + _feedback.host +'/fb.js';
+				fb.src = this.protocal + this.host +'/fb.js';
 				document.body.appendChild(fb);
 			}
+
+			_feedback.init();
 		</script>
 
 4. And you are ready to receive __awesome__ feedback
 
 ---
 
-Comming soon to [Github][github]
+Check us out on [Github][github]
