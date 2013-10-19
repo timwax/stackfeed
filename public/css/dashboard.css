@@ -6,22 +6,75 @@
 }
 /* line 6, ../scss/dashboard.scss */
 .project-messages li {
-  padding: 0.3em;
+  padding: 10px 0;
+  border-bottom: 1px #EEE solid;
 }
-/* line 9, ../scss/dashboard.scss */
+/* line 10, ../scss/dashboard.scss */
 .project-messages li a {
   font-weight: bold;
 }
-/* line 13, ../scss/dashboard.scss */
+/* line 14, ../scss/dashboard.scss */
 .project-messages li:hover {
   background-color: #EEE;
 }
-/* line 18, ../scss/dashboard.scss */
+/* line 19, ../scss/dashboard.scss */
 .project-messages li.read {
   color: grey;
 }
-/* line 21, ../scss/dashboard.scss */
+/* line 22, ../scss/dashboard.scss */
 .project-messages li.read a {
   color: inherit;
   font-weight: normal;
+}
+
+/* line 98, icon/*.png */
+.icon-sprite, .icon-android, .icon-chrome, .icon-chromium, .icon-firefox, .icon-ie, .icon-linux, .icon-opera, .icon-safari {
+  background: url('/img/icon-s5ff8b9a249.png') no-repeat;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-android {
+  background-position: 0 -112px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-chrome {
+  background-position: 0 0;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-chromium {
+  background-position: 0 -48px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-firefox {
+  background-position: 0 -16px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-ie {
+  background-position: 0 -96px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-linux {
+  background-position: 0 -80px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-opera {
+  background-position: 0 -64px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-safari {
+  background-position: 0 -32px;
+}
+
+/* line 32, ../scss/dashboard.scss */
+.icon-sprite, .icon-android, .icon-chrome, .icon-chromium, .icon-firefox, .icon-ie, .icon-linux, .icon-opera, .icon-safari {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
 }

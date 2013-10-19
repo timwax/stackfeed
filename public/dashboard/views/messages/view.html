@@ -11,7 +11,16 @@
 	</div>
 </div>
 
+<div class="row" ng-show="message.info">
+	<div class="col-sm-12">
+
+		<span ng-show="isOpera()" class="icon-opera" title="{{message.info.browserFull}}">&nbsp;</span>
+		<span ng-show="isAndroid()" class="icon-android" title="{{message.info.osFull}}">&nbsp;</span>
+	</div>
+</div>
+
 <br />
+
 <p>{{message.content}}</p>
 
 <div class="panel panel-default meta-cont">

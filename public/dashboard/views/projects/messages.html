@@ -1,6 +1,16 @@
 <div ng-include src="'/dashboard/views/partials/project-header.html'"></div>
 <ul class="project-messages">
-	<li ng-repeat="message in messages" ng-class="{read: message.read != null}">
+	<li ng-repeat="message in messages" ng-class="{read: message.read != null}" class="message">
 		<a ng-href="#/messages/{{message.id}}" data-toggle="tooltip" title="{{message.meta}}" data-html="true">{{message.content.substr(0, options.maxlen)}}<span ng-show="message.content.length > options.maxlen">...</span></a> - {{message.ip}}
+		<!-- Detect browser -->
+		<span ng-show="isOpera(message)" class="icon-opera"></span>
+		<span ng-show="isFirefox(message)" class="icon-firefox"></span>
+		<span ng-show="isChrome(message)" class="icon-chrome"></span>
+		<span ng-show="isChromium(message)" class="icon-chromium"></span>
+		<span ng-show="isIE(message)" class="icon-ie"></span>
+
+		<!-- OS -->
+		<span ng-show="isLinux(message)" class="icon-linux"></span>
+		<span ng-show="isAndroid(message)" class="icon-android"></span>
 	</li>
 </ul>

@@ -17,6 +17,29 @@ class MessageREST extends \BaseController {
 
 		if (isset($project->id) && $project->user_id == Auth::user()->id){
 			$messages = Message::where('project_id', '=', $pid)->orderBy('created_at', 'DESC')->get();
+
+			$parser = new UA();
+
+			foreach ($messages as $key => $value) {
+
+				$meta = json_decode($value->meta, 1);
+
+				if (isset($meta['userAgent'])){
+					$result = $parser->parse($meta['userAgent']);
+
+					$ua = array();
+
+					$ua['browser'] = $result->ua->family;
+					$ua['browserVersion'] = $result->ua->toVersionString;
+					$ua['browserFull'] = $result->ua->toString;
+
+					$ua['os'] = $result->os->family;
+					$ua['osFull'] = $result->os->toString;
+					$ua['osVesion'] = $result->os->toVersionString;
+
+					$messages[$key]->info = $ua;
+				}
+			}
 		}
 		
 		return Response::json($messages);
@@ -60,10 +83,30 @@ class MessageREST extends \BaseController {
 
 			// Check if one has access to project
 
+			$parser = new UA();
+			
+
 			if ($project->user_id == Auth::user()->id){
 				$response = $message->toArray();
 				$response['meta'] = json_decode($response['meta']);
+			
 				$response['project'] = $project->toArray();
+
+				if ($response['meta']->userAgent != ''){
+					$result = $parser->parse($response['meta']->userAgent);
+
+					$ua = array();
+
+					$ua['browser'] = $result->ua->family;
+					$ua['browserVersion'] = $result->ua->toVersionString;
+					$ua['browserFull'] = $result->ua->toString;
+
+					$ua['os'] = $result->os->family;
+					$ua['osFull'] = $result->os->toString;
+					$ua['osVesion'] = $result->os->toVersionString;
+
+					$response['info'] = $ua;
+				}
 				
 				Queue::push('MessageJobs@onread', array('message' => $message->toArray(), 'project' => $project->toArray()));
 				

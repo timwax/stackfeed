@@ -187,6 +187,8 @@ return array(
 	),
 
 	'hostname' => 'awkward-alfreda.gopagoda.com',
-	'pid' => 'ME1wg4K5CfDO'
+	'pid' => 'ME1wg4K5CfDO',
+
+	'ratelimit' => 3,
 
 );

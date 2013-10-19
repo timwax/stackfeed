@@ -15,6 +15,10 @@
 		<div class="navbar-brand">
 			<a href="#/"><h1 style="font-size: 1em; margin:0; padding:0; font-weight: bold">stackFeedback</h1></a>
 		</div>
+
+		<div class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
+			|||
+		</div>
 		<div class="navbar-collapse collapse navbar-top-collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="#/">Dashboard</a></li>
@@ -22,7 +26,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">{{Auth::user()->username}}</a></li>
-				<li style="height: 20px; background-color:#CCC; width: 1px; margin-top: 1em;"></li>
+				<li style="height: 20px; background-color:#CCC; width: 1px; margin-top: 1em;" class="xs-hidden"></li>
 				<li><a href="{{ URL::to('accounts/logout') }}">
 				<span class="glyphicon glyphicon-logout"></span>logout</a></li>
 			</ul>

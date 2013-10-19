@@ -6,7 +6,9 @@
 	"require": {
 		"laravel/framework": "4.0.*",
 		"fideloper/proxy": "dev-master",
-		"vtalbot/markdown": "1.*"
+		"vtalbot/markdown": "1.*",
+		"dubcanada/uaparser": "dev-master",
+		"gregwar/captcha": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

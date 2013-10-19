@@ -7,19 +7,25 @@
 <textarea style="min-height: 400px; width: 100%">
 <script type="text/javascript">
 	var _feedback = _feedback || {};
-	_feedback.project = '{{project.public_id}}';
-	_feedback.widgets = ['feedback'];
-	_feedback.host = '{{project.host}}';
-	_feedback.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
+	_feedback.project = "{{project.public_id}}";
 	_feedback.label = 'Feedback';
-	_feedback.inline = '{{inline}}'
+	_feedback.host = "{{project.host}}";
+	_feedback.type = 'inline'; 
+	_feedback.trigger = '';
+	_feedback.preload = false;
+	_feedback.position = 'bottom left';
+	_feedback.context = '';
 
-	{
+	_feedback.init = function(){
+		this.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
+
 		var fb = document.createElement('script'); 
 		fb.type = 'text/javascript'; 
 		fb.async = true; 
-		fb.src = _feedback.protocal + _feedback.host +'/fb.js';
+		fb.src = this.protocal + this.host +'/fb.js';
 		document.body.appendChild(fb);
 	}
+
+	_feedback.init();
 </script>
 </textarea>

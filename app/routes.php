@@ -112,14 +112,53 @@ Route::get('home', ['before' => 'auth' , function(){
 
 Route::group(['prefix' => 'embed'], function(){
 	Route::get('feedback.php', function(){
-		Log::debug('Input: ', Input::all());
+
+		$limit = Config::get('app.ratelimit') ? Config::get('app.ratelimit') : 3;
+
+		if (Cache::get('ratelimit_' . $_SERVER['REMOTE_ADDR']) >= $limit) {
+			Session::set('caller', urldecode(Request::fullUrl()));
+
+			return Redirect::to('embed/captcha.php');
+		}
+
 		$project = Project::where('public_id', '=', Input::get('pid'))->first();
 
 		if (!isset($project->id) || !$project->active ) return Response::make('');
 
 		return View::make('embed.feedback', ['status' => '1']);
 	});
+
+	// Catcha route
+	Route::get('captcha.php', function(){
+		$builder = new Gregwar\Captcha\CaptchaBuilder();
+
+		$builder->build();
+
+		Session::set('captcha', $builder->getPhrase());
+
+		return View::make('embed.captcha', array('builder' => $builder));
+	});
+
+	Route::post('captcha.php', function(){
+		Log::debug('Validated captcha: '. Session::get('captcha'), Input::all());
+
+		if(Input::has('captcha') && strtolower(Input::get('captcha')) == strtolower(Session::get('captcha'))){
+			// We are good
+
+			// Reset ratelimit
+			Cache::put('ratelimit_' . $_SERVER['REMOTE_ADDR'], 0, 60);
+
+			// Redirect to requested
+
+			Log::info('Awesome dude');
+
+			return Redirect::to(Session::get('caller'));
+		}
+
+		return Redirect::to('embed/captcha.php')->with('msg', 'Invalid captcha entered');
+	});
 });
+
 
 Route::post('fb.php', function(){
 	$rules = [
@@ -127,7 +166,7 @@ Route::post('fb.php', function(){
 		'project' => 'required|exists:projects,public_id'
 	];
 
-	Log::debug('Requert', Input::all());
+	Log::debug('Request', Input::all());
 
 	$v = Validator::make(Input::all(), $rules);
 
@@ -135,7 +174,39 @@ Route::post('fb.php', function(){
 		return Response::json([ 'message' => 'Sending feedback failed, try again later'], 449);
 	}
 
+	// Check rate limit
+	
+	$limit = Config::get('app.ratelimit') ? Config::get('app.ratelimit') : 3;
+
+	$ip = $_SERVER['REMOTE_ADDR'];
+
+	Log::debug($ip);
+
+	if (Cache::has( 'ratelimit_' . $ip )){
+		$_limit = Cache::get('ratelimit_' . $ip);
+	}else{
+		Cache::put('ratelimit_' . $ip, 0, 60);
+		$_limit = 0;
+	}
+
+	Log::debug('Current rate limit: ' . $_limit);
+	// Get project
 	$project = Project::where('public_id', '=', Input::get('project'))->first();
+
+	// Check rate limit
+
+	if (Auth::check() && Auth::user()->id == $project->user_id){
+		// Accept user rate limiting 30/hr
+		Log::debug('Hey', Auth::user()->username);
+
+	}else{
+		Log::debug('Rate limiting as anonymous ');
+
+		if ( $_limit >= $limit ){
+			return Response::json(array('type' => 'ratelimit', 'message' => 'Check if you are human'));
+		} 
+	}
+	
 
 	$message = new Message();
 
@@ -148,6 +219,9 @@ Route::post('fb.php', function(){
 
 	Log::debug('Message', $message->toArray());
 	if($message->save()){
+		// Increment ratelimit
+		Cache::increment('ratelimit_' . $ip);
+		
 		// Saved OK
 		Queue::push('MessageJobs@onadd', array('message' => $message->toArray(), 'project' => $project->toArray()));
 		

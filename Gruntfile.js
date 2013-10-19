@@ -48,8 +48,12 @@ module.exports = function(grunt){
 		compass: {
 			dev: {
 				options: {
-					sassDir: 'public/scss',
-					cssDir: 'public/css'
+					sassDir: 'scss',
+					cssDir: 'css',
+					imagesDir: 'img/',
+					httpImagesPath: '/',
+					httpPath: '/',
+					basePath: './public/'
 				}
 			}
 			

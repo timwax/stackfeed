@@ -4,7 +4,8 @@
 	padding: 0;
 
 	li{
-		padding: 0.3em;
+		padding: 10px 0;
+		border-bottom: 1px #EEE solid;
 
 		a{
 			font-weight: bold;
@@ -23,4 +24,13 @@
 			font-weight: normal;
 		}
 	}
+}
+
+@import "icon/*.png";
+@include all-icon-sprites;
+
+.icon-sprite{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
 }
