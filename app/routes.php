@@ -132,7 +132,7 @@ Route::group(['prefix' => 'embed'], function(){
 	Route::get('captcha.php', function(){
 		$builder = new Gregwar\Captcha\CaptchaBuilder();
 
-		$builder->build();
+		$builder->build(200, 50);
 
 		Session::set('captcha', $builder->getPhrase());
 
