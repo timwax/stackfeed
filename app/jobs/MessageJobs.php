@@ -27,7 +27,6 @@ class MessageJobs{
 		$job->delete();
 	}
 	
-/*
 
 	public function onedit($job, $data){
 		Log::debug('Starting oneditmessage: ', $data);
@@ -40,8 +39,6 @@ class MessageJobs{
 		
 		$job->delete();
 	}
-
-*/
 	
 	public function onread($job, $data){
 		Log::debug('Starting onreadmessage: ', $data);

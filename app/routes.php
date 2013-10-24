@@ -235,6 +235,7 @@ Route::group(['before' => 'auth', 'prefix' => 'api/v1'], function(){
 	Route::resource('projects', 'ProjectREST');
 	Route::resource('messages', 'MessageREST');
 	Route::get('projects/{id}/messages', ['uses' => 'MessageREST@index']);
+	Route::post('messages/{id}/star', ['uses' => 'MessageREST@star']);
 });
 
 Route::get('/p/{page}', function($page){

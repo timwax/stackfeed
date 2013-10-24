@@ -74,7 +74,7 @@ app.controller('ViewProjectCtrl', ['$scope', 'Project', '$routeParams', function
 	});
 }])
 
-app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', function($scope, Project, ProjectMessages, $route, $routeParams){
+app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', 'Star', function($scope, Project, ProjectMessages, $route, $routeParams, Star){
 	$scope.project = {};
 
 	Project.get({id : $route.current.params.id }, function(project){
@@ -83,6 +83,30 @@ app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages'
 
 	$scope.options = { maxlen: 80 };
 	$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
+
+	$scope.selected = {};
+
+	$scope.star = function(i){
+		var msg = $scope.messages[i];
+		var star = new Star({ id: msg.id });
+
+		if ($scope.messages[i].stared == 1){
+			// Update server: edit star
+			star.$star({ star: 0 }, function(response){
+				$scope.messages[i].stared = response.stared;
+			});
+		}else{
+			// Update server: create star
+			star.$star({ star: 1 }, function(response){
+				$scope.messages[i].stared = response.stared;
+			});
+			
+		}
+	}
+
+	$scope.$watch('selected', function(val, newValue){
+		//console.log($scope.selected);
+	}, true);
 
 	$scope.isAndroid = function(msg){
 		if (!msg.info) return false;

@@ -13,3 +13,11 @@ services.factory('Project', function($resource){
 services.factory('ProjectMessages', function($resource){
 	return $resource('/api/v1/projects/:id/messages', { id: '@id' });
 });
+
+services.factory('Star', function($resource){
+	return $resource('/api/v1/messages/:id/star', {id: '@id'}, 
+		{ 
+			star: {method: 'POST', params: { star: true }}
+		}
+	);
+});

@@ -39,6 +39,9 @@ class MessageREST extends \BaseController {
 
 					$messages[$key]->info = $ua;
 				}
+
+				if (!isset($value->stared))
+					$messages[$key]->stared = 0;
 			}
 		}
 		
@@ -163,13 +166,41 @@ class MessageREST extends \BaseController {
 					$message->delete();
 				}
 	
-				Queue::job('MessageJobs@ondelete', array('message' => $message->toArray(), 'project' => $project->toArray()));
+				Queue::push('MessageJobs@ondelete', array('message' => $message->toArray(), 'project' => $project->toArray()));
 				
 				return Response::json([]);
 			}
 		}
 
 		return Response::make('', 403);
+	}
+
+	/*
+	 * Star message
+	 */
+	
+	public function star($id){
+		$message = Message::find($id);
+
+		if ($message->id){
+			// Load project
+
+			$project = Project::find($message->project_id);
+
+			// Check if one has access to project
+
+			if ($project->user_id == Auth::user()->id){
+				$stared = Input::get('star') == 1 ? 1 : 0;
+				
+				$message->stared = $stared;
+
+				$message->save();
+
+				Queue::push('MessageJobs@onedit', array('message' => $message->toArray(), 'project' => $project->toArray()));
+				
+				return Response::json(['stared' => $message->stared]);
+			}
+		}
 	}
 
 }
