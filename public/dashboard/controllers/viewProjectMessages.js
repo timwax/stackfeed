@@ -1,4 +1,14 @@
-app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', 'Star', 'MessageFilterService', '$http', function($scope, Project, ProjectMessages, $route, $routeParams, Star, MessageFilterService, $http){
+app.controller('ViewProjectMessagesCtrl', [
+	'$scope', 
+	'Project',
+	'ProjectMessages', 
+	'$route', 
+	'$routeParams', 
+	'Star', 
+	'MessageFilterService', 
+	'$http', 
+	'UI',
+	function($scope, Project, ProjectMessages, $route, $routeParams, Star, MessageFilterService, $http, UI){
 	$scope.project = {};
 
 	Project.get({id : $route.current.params.id }, function(project){
@@ -74,6 +84,10 @@ app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages'
 		//console.log($scope.selected);
 	}, true);
 
+	// UI attachment
+
+	$scope.UI = UI;
+	
 	$scope.isAndroid = function(msg){
 		if (!msg.info) return false;
 		return /android/ig.test(msg.info.osFull);

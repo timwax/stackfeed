@@ -9,6 +9,7 @@
 		<a ng-href="#/messages/{{message.id}}" data-toggle="tooltip" title="{{message.meta}}" data-html="true">{{message.content.substr(0, options.maxlen)}}<span ng-show="message.content.length > options.maxlen">...</span></a>
 		<!-- Detect browser -->
 		<span ng-show="isOpera(message)" class="icon-opera"></span>
+		<span ng-show="UI.isAndroidBrowser(message)" class="icon-android-browser"></span>
 		<span ng-show="isFirefox(message)" class="icon-firefox"></span>
 		<span ng-show="isChrome(message)" class="icon-chrome"></span>
 		<span ng-show="isChromium(message)" class="icon-chromium"></span>

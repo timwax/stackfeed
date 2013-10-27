@@ -1,0 +1,13 @@
+<div class="project-filters" ng-controller="ProjectFilterMessagesCtrl" ng-show="toggle">
+	<input type="text" placeholder="Search..." ng-model="filters.q" />
+	<dl>
+		<dt>Browser</dt>
+		<dd>
+			<ul>
+				<li ng-repeat="browser in filters.browser">
+					<span class="{{browser.icon}}"></span>&nbsp;<input type="checkbox" ng-model="filters.browser[$index].selected"> {{browser.title}}
+				</li>
+			</ul>
+		</dd>
+	</dl>
+</div>

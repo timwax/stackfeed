@@ -216,6 +216,9 @@ Route::post('fb.php', function(){
 	$message->project_id = $project->id;
 	$message->ip = $_SERVER['REMOTE_ADDR'];
 	$message->meta = json_encode(Input::get('meta'));
+	$message->deleted_at = null;
+	$message->read = null;
+	$message->stared = 0;
 
 	Log::debug('Message', $message->toArray());
 	if($message->save()){
