@@ -236,6 +236,105 @@ Route::group(['before' => 'auth', 'prefix' => 'api/v1'], function(){
 	Route::resource('messages', 'MessageREST');
 	Route::get('projects/{id}/messages', ['uses' => 'MessageREST@index']);
 	Route::post('messages/{id}/star', ['uses' => 'MessageREST@star']);
+
+	// Search entry point
+	Route::post('messages/{id}/star', ['uses' => 'MessageREST@star']);
+
+	// Index messages
+	Route::get('index/messages', function(){
+
+		$messages = Message::all();
+
+		if (count($messages) > 0){
+			foreach($messages as $message){
+				// Format indexed fields
+
+				$index = new MessageIndex();
+				$index->index($message->toArray());
+			}
+		}
+
+	});
+
+	Route::get('search/messages', function(){
+		$response = array();
+
+		$client = new \Elastica\Client();
+
+		$index = $client->getIndex('feedback');
+
+		if (!Input::has('pid')) return Response::make('{"status": "1", "message": "Project not specified"}');
+
+		// Check if account has privileges on project
+
+		$boolQuery = new Elastica\Query\Bool();
+
+		if(Input::has('q') && Input::get('q') != ''){
+			$content = new Elastica\Query\Text();
+			$content->setField('content', Input::get('q'));
+			$boolQuery->must($content);
+		}
+		
+
+		$project = new Elastica\Query\Term();
+		$project->setTerm('project_id', Input::get('pid'));	
+		$boolQuery->addMust($project);	
+
+		if (Input::has('stared')){
+			$stared = new Elastica\Query\Term();
+			$stared->setTerm('stared', Input::get('stared'));
+
+			$boolQuery->addMust($stared);
+		}
+		
+		if (Input::has('browser')){
+			if (substr_count(Input::get('browser'), ',') > 0){
+				// Multiple browsers
+				$terms = new Elastica\Query\Terms('browser', preg_split('/,/', strtolower(Input::get('browser'))));
+				$terms->addParam('minimum_should_match', 1);
+				$boolQuery->addShould($terms);
+			}else{
+				// Single browser
+
+				$browser = new Elastica\Query\Term();
+				$browser->setTerm('browser', strtolower(Input::get('browser')));
+
+				$boolQuery->addMust($browser);
+			}
+			
+		}		
+
+		if (Input::has('os')){
+			$os = new Elastica\Query\Term();
+			$os->setTerm('os', strtolower(Input::get('os')));
+
+			$boolQuery->addMust($os);
+		}
+		
+
+		$query = new Elastica\Query($boolQuery);
+
+		//print_r($query->getParams());
+		$query->setLimit(25);
+
+		$rs = $index->search($query);
+
+		if ($rs->count() > 0){
+			foreach($rs->getResults() as $result){
+				$response[] = $result->getData();
+			}
+		}
+
+		return Response::json($response);
+	});
+});
+
+Route::get('test', function(){
+	$p = new ProjectIndex(1);
+
+	$p->get();
+
+	return Response::make('');
 });
 
 Route::get('/p/{page}', function($page){

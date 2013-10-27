@@ -41,6 +41,61 @@ app.controller('IndexCtrl', [function($scope){
 
 }]);
 
+app.controller('ProjectFilterMessagesCtrl', ['$scope', 'MessageFilterService', function($scope, MessageFilterService){
+	$scope.$on('messageFilterInit', function(){
+		$scope.toggle = true;
+	});
+
+	$scope.toggle = false;
+
+	$scope.filters = {
+		browser: [
+			{
+				title: 'Firefox',
+				items: 200,
+				icon: 'icon-firefox',
+				selected: 0
+			},
+			{
+				title: 'Chromium',
+				items: 100,
+				icon: 'icon-chromium',
+				selected: 0
+			},
+			{
+				title: 'Chrome',
+				items: 100,
+				icon: 'icon-chrome',
+				selected: 0
+			},
+			{
+				title: 'Internet Explorer',
+				items: 100,
+				icon: 'icon-ie',
+				selected: 0
+			},
+			{
+				title: 'Opera',
+				items: 100,
+				icon: 'icon-opera',
+				selected: 0
+			}
+		],
+		q: '',
+		lang: []
+	}
+	
+	$scope.options = {};
+
+	$scope.$watch('filters.browser', function(){
+		MessageFilterService.set('browser', $scope.filters.browser);
+	}, 1);	
+
+	$scope.$watch('filters.q', function(){
+		MessageFilterService.set('q', $scope.filters.q);
+	});
+}]);
+
 app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project){
 	$scope.projects = Project.query();
 }]);
@@ -74,15 +129,57 @@ app.controller('ViewProjectCtrl', ['$scope', 'Project', '$routeParams', function
 	});
 }])
 
-app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', 'Star', function($scope, Project, ProjectMessages, $route, $routeParams, Star){
+app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', 'Star', 'MessageFilterService', '$http', function($scope, Project, ProjectMessages, $route, $routeParams, Star, MessageFilterService, $http){
 	$scope.project = {};
 
 	Project.get({id : $route.current.params.id }, function(project){
 		$scope.project = project;
+		MessageFilterService.init({ pid: project.id });
 	});
 
 	$scope.options = { maxlen: 80 };
+
 	$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
+
+	$scope.$on('messageFilterUpdate', function(){
+		//console.log(MessageFilterService.params)
+
+		var count = 0;
+
+		var params = MessageFilterService.params;
+
+		var _params = { pid: params.pid };
+
+		
+		// process browsers
+		var browsers = [];
+
+		angular.forEach(MessageFilterService.params.browser, function(value, key){
+			if (value.selected){
+				browsers.push(value.title);
+			}
+		});
+
+		if (browsers.length > 0){
+			_params.browser = browsers.join(',');
+			count++;
+		}
+
+		if (params.q != '' || params.q.length > 0){
+			_params.q = params.q;
+			count++;
+		} 
+
+		if (count == 0){
+			// No filter just load from database
+			$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
+		}else{
+			$http.get('/api/v1/search/messages', {params: _params}).success(function(response){
+				$scope.messages = response;
+			});
+		}
+		
+	});
 
 	$scope.selected = {};
 

@@ -2,6 +2,14 @@
 
 <ul class="projects">
 	<li ng-repeat="project in projects" class="project">
-		<a ng-href="#/projects/{{project.id}}">{{project.name}}
+		<a ng-href="#/projects/{{project.id}}">{{project.name}}</a>
+		&nbsp;
+		<a ng-href="#/projects/{{project.id}}/messages" ng-show="project.new_messages > 0">
+			<span title="unread messages" class="unread">( {{project.new_messages}} <span class="glyphicon glyphicon-envelope"></span> )</span>
+		</a>
+		&nbsp;
+		<span ng-show="project.active == 1" class="glyphicon glyphicon-ok-sign active" title="Active"></span>
+		&nbsp;
+		<span class="total" title="Total received messages">{{project.total_messages}}</span>
 	</li>
 </ul>

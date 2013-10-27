@@ -14,6 +14,23 @@
 		&:hover{
 			background-color: #EEE;
 		}
+
+
+	}
+
+	.message{
+		.star{
+			color: #CCC;
+			font-size: 1.2em;
+
+			&:hover{
+				text-shadow: 0 0 1px #000;
+			}
+
+			&.stared{
+				color: gold;
+			}
+		}
 	}
 
 	li.read{
@@ -33,4 +50,54 @@
 	width: 16px;
 	height: 16px;
 	display: inline-block;
+}
+
+/*
+ * Projects view
+ */
+
+.projects{
+	margin: 0;
+
+	.project{
+		padding: 0.5em 0;
+		border-bottom: 1px #EEE solid;
+
+		.active{
+			color: #CCC;
+		}
+
+		.unread{
+			font-weight: bold;
+		}
+
+		.total{
+			color: #CCC;
+		}
+	}
+}
+
+.project-filters{
+	input[type=text]{
+		border: none;
+		display: block;
+		width: 100%;
+		padding: 0.4em 0.5em;
+		border-bottom: 1px #CCC solid;
+	}
+
+	dt{
+		padding: 0.3em;
+		background-color: #EEE;
+		margin-bottom: 1em;
+	}
+	ul{
+		margin: 0;
+		padding: 0;
+
+		li{
+			list-style-type: none;
+			margin-left: 1em;
+		}
+	}
 }

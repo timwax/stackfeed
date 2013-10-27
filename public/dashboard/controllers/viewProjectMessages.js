@@ -1,12 +1,54 @@
-app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', 'Star', function($scope, Project, ProjectMessages, $route, $routeParams, Star){
+app.controller('ViewProjectMessagesCtrl', ['$scope', 'Project','ProjectMessages', '$route', '$routeParams', 'Star', 'MessageFilterService', '$http', function($scope, Project, ProjectMessages, $route, $routeParams, Star, MessageFilterService, $http){
 	$scope.project = {};
 
 	Project.get({id : $route.current.params.id }, function(project){
 		$scope.project = project;
+		MessageFilterService.init({ pid: project.id });
 	});
 
 	$scope.options = { maxlen: 80 };
+
 	$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
+
+	$scope.$on('messageFilterUpdate', function(){
+		//console.log(MessageFilterService.params)
+
+		var count = 0;
+
+		var params = MessageFilterService.params;
+
+		var _params = { pid: params.pid };
+
+		
+		// process browsers
+		var browsers = [];
+
+		angular.forEach(MessageFilterService.params.browser, function(value, key){
+			if (value.selected){
+				browsers.push(value.title);
+			}
+		});
+
+		if (browsers.length > 0){
+			_params.browser = browsers.join(',');
+			count++;
+		}
+
+		if (params.q != '' || params.q.length > 0){
+			_params.q = params.q;
+			count++;
+		} 
+
+		if (count == 0){
+			// No filter just load from database
+			$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
+		}else{
+			$http.get('/api/v1/search/messages', {params: _params}).success(function(response){
+				$scope.messages = response;
+			});
+		}
+		
+	});
 
 	$scope.selected = {};
 

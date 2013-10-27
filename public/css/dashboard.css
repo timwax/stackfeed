@@ -17,11 +17,24 @@
 .project-messages li:hover {
   background-color: #EEE;
 }
-/* line 19, ../scss/dashboard.scss */
+/* line 22, ../scss/dashboard.scss */
+.project-messages .message .star {
+  color: #CCC;
+  font-size: 1.2em;
+}
+/* line 26, ../scss/dashboard.scss */
+.project-messages .message .star:hover {
+  text-shadow: 0 0 1px #000;
+}
+/* line 30, ../scss/dashboard.scss */
+.project-messages .message .star.stared {
+  color: gold;
+}
+/* line 36, ../scss/dashboard.scss */
 .project-messages li.read {
   color: grey;
 }
-/* line 22, ../scss/dashboard.scss */
+/* line 39, ../scss/dashboard.scss */
 .project-messages li.read a {
   color: inherit;
   font-weight: normal;
@@ -72,9 +85,59 @@
   background-position: 0 -32px;
 }
 
-/* line 32, ../scss/dashboard.scss */
+/* line 49, ../scss/dashboard.scss */
 .icon-sprite, .icon-android, .icon-chrome, .icon-chromium, .icon-firefox, .icon-ie, .icon-linux, .icon-opera, .icon-safari {
   width: 16px;
   height: 16px;
   display: inline-block;
+}
+
+/*
+ * Projects view
+ */
+/* line 59, ../scss/dashboard.scss */
+.projects {
+  margin: 0;
+}
+/* line 62, ../scss/dashboard.scss */
+.projects .project {
+  padding: 0.5em 0;
+  border-bottom: 1px #EEE solid;
+}
+/* line 66, ../scss/dashboard.scss */
+.projects .project .active {
+  color: #CCC;
+}
+/* line 70, ../scss/dashboard.scss */
+.projects .project .unread {
+  font-weight: bold;
+}
+/* line 74, ../scss/dashboard.scss */
+.projects .project .total {
+  color: #CCC;
+}
+
+/* line 81, ../scss/dashboard.scss */
+.project-filters input[type=text] {
+  border: none;
+  display: block;
+  width: 100%;
+  padding: 0.4em 0.5em;
+  border-bottom: 1px #CCC solid;
+}
+/* line 89, ../scss/dashboard.scss */
+.project-filters dt {
+  padding: 0.3em;
+  background-color: #EEE;
+  margin-bottom: 1em;
+}
+/* line 94, ../scss/dashboard.scss */
+.project-filters ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 98, ../scss/dashboard.scss */
+.project-filters ul li {
+  list-style-type: none;
+  margin-left: 1em;
 }
