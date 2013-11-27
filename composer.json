@@ -9,7 +9,8 @@
 		"vtalbot/markdown": "1.*",
 		"dubcanada/uaparser": "dev-master",
 		"gregwar/captcha": "dev-master",
-		"ruflin/Elastica": "dev-master"
+		"ruflin/Elastica": "dev-master",
+		"nesbot/carbon": "1.5"
 	},
 	"autoload": {
 		"classmap": [

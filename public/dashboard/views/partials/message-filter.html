@@ -4,10 +4,12 @@
 		<dt>Browser</dt>
 		<dd>
 			<ul>
-				<li ng-repeat="browser in filters.browser">
-					<span class="{{browser.icon}}"></span>&nbsp;<input type="checkbox" ng-model="filters.browser[$index].selected"> {{browser.title}}
+				<li ng-repeat="browser in filters.browsers">
+					<span class="icon-{{browser.term}}"></span>&nbsp;<input type="checkbox" ng-model="filters.browsers[$index].selected"> <span style="text-transform: capitalize">{{browser.term}}</span> <span>({{browser.count}})</span>
 				</li>
 			</ul>
 		</dd>
 	</dl>
+	<button type="button" class="btn btn-secondary btn-sm" ng-click="filter()">Filter</button>
+	<button type="button" class="btn btn-link btn-sm">Cancel</button>
 </div>

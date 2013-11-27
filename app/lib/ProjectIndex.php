@@ -28,12 +28,8 @@ class ProjectIndex{
 
 		$query->addFacet($facet);
 
-		print_r($query->getQuery());
 		$results = $this->index->search($query);
-		var_dump($results->getFacets());
 
-		foreach ($results->getFacets()['browsers']['terms'] as $key => $value) {
-			var_dump($value);
-		}
+		return $results;
 	}
 }

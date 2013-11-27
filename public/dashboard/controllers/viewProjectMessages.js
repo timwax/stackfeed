@@ -9,7 +9,10 @@ app.controller('ViewProjectMessagesCtrl', [
 	'$http', 
 	'UI',
 	function($scope, Project, ProjectMessages, $route, $routeParams, Star, MessageFilterService, $http, UI){
+	
 	$scope.project = {};
+
+	var search = false;
 
 	Project.get({id : $route.current.params.id }, function(project){
 		$scope.project = project;
@@ -19,6 +22,10 @@ app.controller('ViewProjectMessagesCtrl', [
 	$scope.options = { maxlen: 80 };
 
 	$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
+
+	$scope.$on('$routeChangeStart', function(){
+		MessageFilterService.close();
+	});
 
 	$scope.$on('messageFilterUpdate', function(){
 		//console.log(MessageFilterService.params)
@@ -33,9 +40,9 @@ app.controller('ViewProjectMessagesCtrl', [
 		// process browsers
 		var browsers = [];
 
-		angular.forEach(MessageFilterService.params.browser, function(value, key){
+		angular.forEach(MessageFilterService.params.browsers, function(value, key){
 			if (value.selected){
-				browsers.push(value.title);
+				browsers.push(value.term);
 			}
 		});
 
@@ -44,10 +51,12 @@ app.controller('ViewProjectMessagesCtrl', [
 			count++;
 		}
 
-		if (params.q != '' || params.q.length > 0){
+		if (params.q && params.q != '' && params.q.length > 0){
 			_params.q = params.q;
 			count++;
 		} 
+
+		console.log(_params, count);
 
 		if (count == 0){
 			// No filter just load from database
@@ -87,7 +96,7 @@ app.controller('ViewProjectMessagesCtrl', [
 	// UI attachment
 
 	$scope.UI = UI;
-	
+
 	$scope.isAndroid = function(msg){
 		if (!msg.info) return false;
 		return /android/ig.test(msg.info.osFull);

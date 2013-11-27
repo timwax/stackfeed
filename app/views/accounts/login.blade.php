@@ -15,7 +15,7 @@
 <form method="POST" action="/accounts/login">
 	<p>
 		<label>Username</label>
-		<input type="text" name="username" value="{{Input::old('username')}}">
+		<input type="text" name="username" autofocus value="{{Input::old('username')}}">
 	</p>
 	<p>
 		<label>Password</label>

@@ -44,56 +44,41 @@ app.controller('IndexCtrl', [function($scope){
 app.controller('ProjectFilterMessagesCtrl', ['$scope', 'MessageFilterService', function($scope, MessageFilterService){
 	$scope.$on('messageFilterInit', function(){
 		$scope.toggle = true;
+
+		$scope.filters = {
+			browsers: MessageFilterService.params.browsers,
+			q: '',
+			lang: []
+		}
+	});	
+
+	$scope.$on('messageFilterClose', function(){
+		$scope.toggle = false;
 	});
 
 	$scope.toggle = false;
-
-	$scope.filters = {
-		browser: [
-			{
-				title: 'Firefox',
-				items: 200,
-				icon: 'icon-firefox',
-				selected: 0
-			},
-			{
-				title: 'Chromium',
-				items: 100,
-				icon: 'icon-chromium',
-				selected: 0
-			},
-			{
-				title: 'Chrome',
-				items: 100,
-				icon: 'icon-chrome',
-				selected: 0
-			},
-			{
-				title: 'Internet Explorer',
-				items: 100,
-				icon: 'icon-ie',
-				selected: 0
-			},
-			{
-				title: 'Opera',
-				items: 100,
-				icon: 'icon-opera',
-				selected: 0
-			}
-		],
-		q: '',
-		lang: []
-	}
 	
 	$scope.options = {};
 
-	$scope.$watch('filters.browser', function(){
-		MessageFilterService.set('browser', $scope.filters.browser);
-	}, 1);	
+	// $scope.$watch('filters.browsers', function(){
+	// 	if (MessageFilterService.started == true)
+	// 		MessageFilterService.set('browsers', $scope.filters.browsers);
+	// }, 1);	
 
-	$scope.$watch('filters.q', function(){
-		MessageFilterService.set('q', $scope.filters.q);
-	});
+	// $scope.$watch('filters.q', function(){
+	// 	if (MessageFilterService.started == true)
+	// 		MessageFilterService.set('q', $scope.filters.q);
+	// });
+
+	$scope.filter = function(){
+		//MessageFilterService.set('browsers', );
+
+		MessageFilterService.set({
+			'browsers': $scope.filters.browsers,
+			'q': $scope.filters.q
+		});
+		//MessageFilterService.set('q', $scope.filters.q);
+	}
 }]);
 
 app.controller('ProjectsCtrl', ['$scope', 'Project', function($scope, Project){
@@ -140,7 +125,10 @@ app.controller('ViewProjectMessagesCtrl', [
 	'$http', 
 	'UI',
 	function($scope, Project, ProjectMessages, $route, $routeParams, Star, MessageFilterService, $http, UI){
+	
 	$scope.project = {};
+
+	var search = false;
 
 	Project.get({id : $route.current.params.id }, function(project){
 		$scope.project = project;
@@ -150,6 +138,10 @@ app.controller('ViewProjectMessagesCtrl', [
 	$scope.options = { maxlen: 80 };
 
 	$scope.messages = ProjectMessages.query({ id: $route.current.params.id });
+
+	$scope.$on('$routeChangeStart', function(){
+		MessageFilterService.close();
+	});
 
 	$scope.$on('messageFilterUpdate', function(){
 		//console.log(MessageFilterService.params)
@@ -164,9 +156,9 @@ app.controller('ViewProjectMessagesCtrl', [
 		// process browsers
 		var browsers = [];
 
-		angular.forEach(MessageFilterService.params.browser, function(value, key){
+		angular.forEach(MessageFilterService.params.browsers, function(value, key){
 			if (value.selected){
-				browsers.push(value.title);
+				browsers.push(value.term);
 			}
 		});
 
@@ -175,10 +167,12 @@ app.controller('ViewProjectMessagesCtrl', [
 			count++;
 		}
 
-		if (params.q != '' || params.q.length > 0){
+		if (params.q && params.q != '' && params.q.length > 0){
 			_params.q = params.q;
 			count++;
 		} 
+
+		console.log(_params, count);
 
 		if (count == 0){
 			// No filter just load from database
@@ -218,7 +212,7 @@ app.controller('ViewProjectMessagesCtrl', [
 	// UI attachment
 
 	$scope.UI = UI;
-	
+
 	$scope.isAndroid = function(msg){
 		if (!msg.info) return false;
 		return /android/ig.test(msg.info.osFull);

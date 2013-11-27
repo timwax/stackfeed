@@ -1,13 +1,19 @@
+@import "compass";
+
 $button-height: 28px;
 $button-background-color: #333;
 $button-color: #FFF;
 $button-background: $button-color;
 $body-display: none;
 
+.ss-issue-highlight{
+	outline: 2px green solid;
+}
+
 .feedback-cont{
 	background-color: #EEE;
 	color: #000;
-	display: none;
+	// display: none;
 
 	.buttons{
 		padding: 0 0.5em;
@@ -97,10 +103,11 @@ $body-display: none;
 }
 @media (max-width: 640px){
 	.feedback-cont{
-		position: static;
-		bottom: none;
+		position: relative;
+		bottom: 0;
 		left: 0;
 		width: 100%;
+
 
 		.buttons{
 			position: static;
@@ -114,6 +121,75 @@ $body-display: none;
 			bottom: none;
 			right: none;
 			width: 100%;
+		}
+	}
+}
+
+.st-feedback{
+	position: fixed;
+	bottom: 0;
+	right: 2%;
+
+	.widget{
+		float: left;
+		margin-left: 1em;
+		width: 250px;
+
+		.header{
+			position: relative;
+			background-color: #333;
+			padding: 3px 5px;
+			border-width: 1px 1px 0 1px;
+			border-style: solid;
+			border-color: #000;
+			color: #FFF;
+			height: 28px;
+			cursor: pointer;
+			border-radius: 0.3em 0.3em 0 0;
+			// needs latest Compass, add '@import "compass"' to your scss
+			background-color: #333; // Old browsers
+			@include filter-gradient(#333, darken(#333, 8%), vertical); // IE6-9
+			@include background-image(linear-gradient(top,  #333 0%,darken(#333, 8%) 100%));
+
+
+			img{
+				position: absolute;
+				top: 4px;
+				left: 10px;
+				user-select: none;
+			}
+
+			.title{
+				position: absolute;
+				top: 2px;
+				left: 35px;
+			}
+
+			.close{
+				position: absolute;
+				right: 5px;
+				top: 0;
+				display: none;
+				color: white;
+			}			
+		}
+
+		.body{
+			background-color: #FFF;
+			border-style: solid;
+			border-width: 0 1px;
+			border-color: #CCC;
+			min-height: 200px;
+			display: none;
+
+			iframe{
+				margin: 0;
+				padding:0;
+				max-width: 100%;
+				border: none;
+				outline: none;
+				height: 360px;
+			}
 		}
 	}
 }

@@ -25,11 +25,11 @@ Route::group(['prefix' => 'accounts'], function(){
 		return View::make('accounts.sucess');
 	});
 
-	Route::get('logout', function(){
+	Route::get('logout', array('as' => 'logout', function(){
 		Auth::logout();
 
 		return Redirect::to('/');
-	});
+	}));
 
 	Route::get('login', function(){
 		return View::make('accounts.login');
@@ -110,6 +110,100 @@ Route::get('home', ['before' => 'auth' , function(){
 	return View::make('dashboard.home', $response);
 }]);
 
+Route::group(array('prefix' => 'ui', 'before' => 'auth'), function(){
+
+	/* Project dashboard */
+	Route::get('project', array('as' => 'project-dashboard', function(){
+		$messages = new MessageRepository();
+
+		$feedback = $messages->feedback(1, 3);
+
+		return View::make('project.dashboard', array('feedback' => $feedback));
+	}));	
+
+	/* Project feedback */
+	Route::get('project/feedback', array('as' => 'project-feedback', function(){
+
+		$messages = Message::orderBy('created_at', 'DESC')->paginate(25);
+
+		$links = $messages->links();
+		$paginate = array('from' => $messages->getFrom(), 'to' => $messages->getTo(), 'total' => $messages->getTotal());
+		$items = array();
+
+		$parse = new UA();
+
+		foreach ($messages as $key => $value) {
+
+			$item = $value->toArray();
+
+			if ($value->meta != ''){
+				$meta = json_decode($value->meta);
+
+				if (isset($meta->userAgent)){
+					$userAgent = $meta->userAgent;
+
+					$results = $parse->parse($userAgent);
+
+					$item['browser'] = $results->ua->family;
+					$item['browserFull'] = $results->ua->toString;
+				}
+				
+			}
+
+			$items[] = $item;
+		}
+
+		return View::make('project.feedback', array('messages' => $items, 'links' => $links, 'paginate' => $paginate));
+	}));
+
+	/* Project setting */
+	Route::get('project/settings/basic', array('as' => 'project-settings-basic', function(){
+		$projectRepository = new ProjectRepository();
+
+		return View::make('project.settings.basic', ['project' => $projectRepository->find(1)]);
+	}));	
+
+	/* Project setting */
+	Route::get('project/embed', array('as' => 'project-embed', function(){
+		return View::make('project.embed');
+	}));	
+
+	/* Project setting */
+	Route::get('project/feedback/message', array('as' => 'project-feedback-message', function(){
+		$feedback = new MessageRepository();
+		$projectRepository = new ProjectRepository();
+
+		$message = $feedback->get(59);
+		$project = $projectRepository->find($message->project_id);
+
+		return View::make('project.feedback-message', array('message' => $message, 'project' => $project));
+	}));
+
+	/*
+	 * Actions
+	 */
+	
+	Route::post('project/{project_id}/settings/basic', ['as' => 'save.project.settings.basic', function($project_id){
+		$projectRepository = new ProjectRepository();
+
+		$project = $projectRepository->find($project_id);
+
+		if (!$project) return Redirect::route('project-settings-basic', array('project_id' => $project_id))->with('error', 'Project not found :D');
+		// Check project ownership
+		
+		if ($project->user_id != Auth::user()->id) return Redirect::route('project-settings-basic', array('project_id' => $project_id))->with('error', 'You dont have permissions to edit this project :D');
+		
+		$project->name = Input::get('name');
+		$project->description = Input::get('description');
+		$project->domain = Input::get('domain');
+
+		if($project->save())
+			Cache::forget('project_'.$project_id);
+		
+			return Redirect::route('project-settings-basic', array('project_id' => $project_id));
+	}]);
+});
+
 Route::group(['prefix' => 'embed'], function(){
 	Route::get('feedback.php', function(){
 
@@ -126,6 +220,23 @@ Route::group(['prefix' => 'embed'], function(){
 		if (!isset($project->id) || !$project->active ) return Response::make('');
 
 		return View::make('embed.feedback', ['status' => '1']);
+	});	
+
+	Route::get('feedback-v0.2.php', function(){
+
+		$limit = Config::get('app.ratelimit') ? Config::get('app.ratelimit') : 3;
+
+		if (Cache::get('ratelimit_' . $_SERVER['REMOTE_ADDR']) >= $limit) {
+			Session::set('caller', urldecode(Request::fullUrl()));
+
+			return Redirect::to('embed/captcha.php');
+		}
+
+		$project = Project::where('public_id', '=', Input::get('pid'))->first();
+
+		if (!isset($project->id) || !$project->active ) return Response::make('');
+
+		return View::make('embed.feedback-v2', ['status' => '1']);
 	});
 
 	// Catcha route
@@ -159,85 +270,62 @@ Route::group(['prefix' => 'embed'], function(){
 	});
 });
 
+/*
+ * Project routes
+ */
 
-Route::post('fb.php', function(){
-	$rules = [
-		'message' => 'required',
-		'project' => 'required|exists:projects,public_id'
-	];
 
-	Log::debug('Request', Input::all());
+Route::group(['prefix'=>'projects', 'before' => 'auth'], function(){
+	Route::get('{project_id}', function($project_id){
 
-	$v = Validator::make(Input::all(), $rules);
+		$projectRepository = new ProjectRepository();
 
-	if ($v->fails()){
-		return Response::json([ 'message' => 'Sending feedback failed, try again later'], 449);
-	}
+		$project = $projectRepository->find($project_id);
 
-	// Check rate limit
-	
-	$limit = Config::get('app.ratelimit') ? Config::get('app.ratelimit') : 3;
+		if (Cache::has('project_1')) print_r(Cache::get('project_1'));
 
-	$ip = $_SERVER['REMOTE_ADDR'];
+		return Response::json($project->toArray());
+	})->where('project_id', '[0-9]+');	
 
-	Log::debug($ip);
+	Route::get('{project_id}/feedback', function($project_id){
+		return $project_id . ' Feedback';
+	})->where('project_id', '[0-9]+');	
 
-	if (Cache::has( 'ratelimit_' . $ip )){
-		$_limit = Cache::get('ratelimit_' . $ip);
-	}else{
-		Cache::put('ratelimit_' . $ip, 0, 60);
-		$_limit = 0;
-	}
-
-	Log::debug('Current rate limit: ' . $_limit);
-	// Get project
-	$project = Project::where('public_id', '=', Input::get('project'))->first();
-
-	// Check rate limit
-
-	if (Auth::check() && Auth::user()->id == $project->user_id){
-		// Accept user rate limiting 30/hr
-		Log::debug('Hey', Auth::user()->username);
-
-	}else{
-		Log::debug('Rate limiting as anonymous ');
-
-		if ( $_limit >= $limit ){
-			return Response::json(array('type' => 'ratelimit', 'message' => 'Check if you are human'));
-		} 
-	}
-	
-
-	$message = new Message();
-
-	$message->content = Input::get('message');
-	$message->email = Input::get('email');
-	$message->fullName = Input::get('name');
-	$message->project_id = $project->id;
-	$message->ip = $_SERVER['REMOTE_ADDR'];
-	$message->meta = json_encode(Input::get('meta'));
-	$message->deleted_at = null;
-	$message->read = null;
-	$message->stared = 0;
-
-	Log::debug('Message', $message->toArray());
-	if($message->save()){
-		// Increment ratelimit
-		Cache::increment('ratelimit_' . $ip);
-		
-		// Saved OK
-		Queue::push('MessageJobs@onadd', array('message' => $message->toArray(), 'project' => $project->toArray()));
-		
-		return Response::json(['message' => 'Message sent to team']);
-	}else{
-		return Response::json([ 'message' => 'Sending feedback failed, try again later'] , 500);
-	}
+	Route::get('{project_id}/feedback/{message_id}', function($project_id){
+		return $project_id . ' Feedback Message';
+	})->where(['project_id' => '[0-9]+', 'message_id' => '[\d]+']);
 });
+
+
+
+Route::post('fb.php', array('uses' => 'Feedback@store'));
 
 Route::group(['before' => 'auth', 'prefix' => 'api/v1'], function(){
 	Route::resource('projects', 'ProjectREST');
 	Route::resource('messages', 'MessageREST');
 	Route::get('projects/{id}/messages', ['uses' => 'MessageREST@index']);
+
+	// Project filters
+	Route::get('projects/{id}/filters', function($id){
+		$p = new ProjectIndex($id);
+
+		$results = $p->get();
+
+		$response = array('browsers' => array(), 'os' => array(), 'language' => array());
+
+		$facets = $results->getFacets();
+
+		// Get browsers
+
+		if (count($facets['browsers']['terms'])){
+			foreach ($facets['browsers']['terms'] as $key => $value) {
+				$response['browsers'][] = $value;
+			}
+		}
+
+		return Response::json($response);
+	});
+
 	Route::post('messages/{id}/star', ['uses' => 'MessageREST@star']);
 
 	// Search entry point
@@ -333,13 +421,17 @@ Route::group(['before' => 'auth', 'prefix' => 'api/v1'], function(){
 });
 
 Route::get('test', function(){
-	$p = new ProjectIndex(1);
+	$messageRepository = new MessageRepository();
 
-	$p->get();
+	$response = $messageRepository->get(59);
 
-	return Response::make('');
+	return Response::json($response);
 });
 
 Route::get('/p/{page}', function($page){
 	return View::make('pages.index', [ 'content' => Markdown::make($page), 'title' => $page ]);
+});
+
+Route::get('suite', function(){
+	return View::make('homepage');
 });

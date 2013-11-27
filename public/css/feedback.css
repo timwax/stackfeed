@@ -1,0 +1,44 @@
+/* line 1, ../scss/feedback.scss */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial;
+  font-size: 0.9em;
+}
+
+/* line 8, ../scss/feedback.scss */
+p.message {
+  font-size: 1em;
+  display: block;
+  margin-top: 5px;
+  height: 110px;
+  overflow: hidden;
+}
+
+/* line 16, ../scss/feedback.scss */
+textarea.msg {
+  height: 150px;
+  width: 100%;
+  margin-top: 10px;
+  border: 1px #EEE solid;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* line 25, ../scss/feedback.scss */
+.brand {
+  font-size: 0.8em;
+  margin: 3px 0;
+  color: #CCC;
+}
+
+/* line 35, ../scss/feedback.scss */
+.actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+/* line 39, ../scss/feedback.scss */
+.actions table {
+  margin: 0 1em;
+}

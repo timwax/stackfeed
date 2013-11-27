@@ -138,7 +138,7 @@
 			_d.message = $('#message').val();
 			_d.name = $('#name').val();
 			_d.email = $('#email').val();
-			_d.project = "{{Input::get('pid')}}";
+			_d.project = app.pid;
 			_d.meta = app.meta;
 
 			return _d;
@@ -159,6 +159,16 @@
 			$.post('/fb.php', _d, function(response, status, xhr){
 				if (status == 'success'){
 					// console.log(response);
+
+					// Check message type and delegate
+
+					if (response.type == 'ratelimit') {
+						console.log('Hey lets verify u r human pal');
+						window.location.reload();
+
+						return;
+					}
+
 					notify();
 				}
 			}, 'JSON');

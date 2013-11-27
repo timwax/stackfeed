@@ -1,0 +1,259 @@
+/* line 106, icon/*.png */
+.icon-sprite, .icon-android-browser, .icon-android, .icon-chrome, .icon-chromium, .icon-firefox, .icon-ie, .icon-linux, .icon-opera, .icon-safari {
+  background: url('/img/icon-s042b3a41f0.png') no-repeat;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-android-browser {
+  background-position: 0 -48px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-android {
+  background-position: 0 -128px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-chrome {
+  background-position: 0 0;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-chromium {
+  background-position: 0 -64px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-firefox {
+  background-position: 0 -16px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-ie {
+  background-position: 0 -112px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-linux {
+  background-position: 0 -96px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-opera {
+  background-position: 0 -80px;
+}
+
+/* line 60, ../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.icon-safari {
+  background-position: 0 -32px;
+}
+
+/* line 4, ../scss/project.scss */
+section {
+  margin-bottom: 3em;
+}
+/* line 8, ../scss/project.scss */
+section.latest-posts ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 13, ../scss/project.scss */
+section.latest-posts ul li {
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+  border-bottom: 1px dotted #EEE;
+}
+/* line 21, ../scss/project.scss */
+section.message {
+  margin-top: 1em;
+  border-width: 0 5px;
+  padding: 0.5em 1em;
+  font-size: 1.3em;
+}
+/* line 31, ../scss/project.scss */
+section.info {
+  background-color: #EEE;
+  border-radius: 0.3em;
+  padding: 0.5em 1em;
+}
+
+/* line 39, ../scss/project.scss */
+.comments ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 44, ../scss/project.scss */
+.comments ul li {
+  padding-bottom: 0.3em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  border-bottom: 1px dotted #CCC;
+}
+/* line 50, ../scss/project.scss */
+.comments ul li:last-child {
+  border-bottom: none;
+}
+
+/* line 57, ../scss/project.scss */
+h4, h5 {
+  font-weight: bold;
+}
+
+/* line 61, ../scss/project.scss */
+.showing {
+  margin-top: 1.5em;
+}
+
+/* line 65, ../scss/project.scss */
+.icon-sprite, .icon-android-browser, .icon-android, .icon-chrome, .icon-chromium, .icon-firefox, .icon-ie, .icon-linux, .icon-opera, .icon-safari {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+/* line 71, ../scss/project.scss */
+.project-title {
+  margin-top: 0.5em;
+}
+
+/* line 75, ../scss/project.scss */
+.project-nav {
+  margin-top: 1.3em;
+  border-right: 1px #CCC solid;
+}
+/* line 79, ../scss/project.scss */
+.project-nav .glyphicon {
+  color: #666;
+}
+/* line 83, ../scss/project.scss */
+.project-nav li.active {
+  border-right: 5px #666 solid;
+  background-color: #EEE;
+}
+/* line 88, ../scss/project.scss */
+.project-nav > li {
+  border-bottom: 1px #EEE solid;
+}
+/* line 92, ../scss/project.scss */
+.project-nav ul.subnav {
+  list-style-type: none;
+  margin-bottom: 0.5em;
+  margin-left: 2em;
+}
+/* line 98, ../scss/project.scss */
+.project-nav ul.subnav li {
+  border-left: 5px solid #EEE;
+}
+
+/* line 105, ../scss/project.scss */
+.latest-feedback ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 110, ../scss/project.scss */
+.latest-feedback ul li {
+  margin: 0;
+  padding: 1em 0;
+  border-bottom: 1px dotted #EEE;
+}
+/* line 115, ../scss/project.scss */
+.latest-feedback ul li .feedback-message-summary {
+  padding: 0;
+  font-size: 0.9em;
+  margin: 0.5em 0;
+}
+/* line 121, ../scss/project.scss */
+.latest-feedback ul li .feedback-url-title {
+  font-weight: bold;
+  margin-right: 1em;
+}
+/* line 126, ../scss/project.scss */
+.latest-feedback ul li .feedback-url {
+  padding: 0;
+  margin: 0;
+  color: green;
+  font-size: 0.8em;
+}
+/* line 132, ../scss/project.scss */
+.latest-feedback ul li .feedback-url .feedback-url-title {
+  font-weight: bold;
+}
+
+/* line 143, ../scss/project.scss */
+.navbar {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px #CCC solid;
+}
+
+/* line 149, ../scss/project.scss */
+.project-summary {
+  margin: 1em 0;
+}
+
+/* line 152, ../scss/project.scss */
+.project-stats {
+  margin: 1em 0;
+}
+
+/* line 155, ../scss/project.scss */
+.project-tasks {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 163, ../scss/project.scss */
+.project-tasks li {
+  display: block;
+  padding: 0.5em 0;
+}
+
+/* Feedback */
+/* line 171, ../scss/project.scss */
+.project-content {
+  margin-top: 1em;
+}
+/* line 184, ../scss/project.scss */
+.project-content .feedback-messages tr .glyphicon-star {
+  color: red;
+}
+/* line 188, ../scss/project.scss */
+.project-content .feedback-messages tr .glyphicon-star-empty {
+  color: #CCC;
+}
+/* line 192, ../scss/project.scss */
+.project-content .feedback-messages tr .posted {
+  font-size: 0.8em;
+  color: #666;
+}
+/* line 197, ../scss/project.scss */
+.project-content .feedback-messages tr .eye {
+  color: #666;
+}
+/* line 200, ../scss/project.scss */
+.project-content .feedback-messages tr .eye:hover {
+  color: #111;
+}
+/* line 205, ../scss/project.scss */
+.project-content .feedback-messages tr .flag {
+  color: #666;
+}
+/* line 208, ../scss/project.scss */
+.project-content .feedback-messages tr .flag:hover {
+  color: #111;
+}
+/* line 213, ../scss/project.scss */
+.project-content .feedback-messages tr:hover {
+  background-color: #EEE;
+}
+/* line 217, ../scss/project.scss */
+.project-content .feedback-messages tr.unread {
+  background-color: #f6f6f6;
+}
+/* line 220, ../scss/project.scss */
+.project-content .feedback-messages tr.unread a.summary {
+  font-weight: bold;
+}

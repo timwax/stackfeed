@@ -1,19 +1,23 @@
-/* line 7, ../scss/app.scss */
+/* line 9, ../scss/app.scss */
+.ss-issue-highlight {
+  outline: 2px green solid;
+}
+
+/* line 13, ../scss/app.scss */
 .feedback-cont {
   background-color: #EEE;
   color: #000;
-  display: none;
 }
-/* line 12, ../scss/app.scss */
+/* line 18, ../scss/app.scss */
 .feedback-cont .buttons {
   padding: 0 0.5em;
   background-color: #333333;
 }
-/* line 16, ../scss/app.scss */
+/* line 22, ../scss/app.scss */
 .feedback-cont .buttons.rounded {
   border-radius: 0.5em 0.5em 0 0;
 }
-/* line 20, ../scss/app.scss */
+/* line 26, ../scss/app.scss */
 .feedback-cont .buttons button {
   display: block;
   width: 100%;
@@ -22,69 +26,69 @@
   background-color: #333333;
   color: white;
 }
-/* line 30, ../scss/app.scss */
+/* line 36, ../scss/app.scss */
 .feedback-cont .feedback-body {
   display: none;
   height: auto;
 }
-/* line 34, ../scss/app.scss */
+/* line 40, ../scss/app.scss */
 .feedback-cont .feedback-body.open {
   border: 1px solid #CCC;
   background-color: #FFF;
   border-radius: 0.5em 0.5em 0 0.5em;
 }
-/* line 40, ../scss/app.scss */
+/* line 46, ../scss/app.scss */
 .feedback-cont .feedback-body.note {
   height: 160px;
 }
-/* line 44, ../scss/app.scss */
+/* line 50, ../scss/app.scss */
 .feedback-cont .feedback-body .help {
   background-color: blue;
   color: #FFF;
   padding: 0 5px;
   font-weight: bold;
 }
-/* line 50, ../scss/app.scss */
+/* line 56, ../scss/app.scss */
 .feedback-cont .feedback-body label {
   width: 25%;
   float: left;
   display: block;
 }
-/* line 55, ../scss/app.scss */
+/* line 61, ../scss/app.scss */
 .feedback-cont .feedback-body label.full {
   display: block;
 }
-/* line 59, ../scss/app.scss */
+/* line 65, ../scss/app.scss */
 .feedback-cont .feedback-body input {
   width: 75%;
 }
-/* line 60, ../scss/app.scss */
+/* line 66, ../scss/app.scss */
 .feedback-cont .feedback-body textarea {
   width: 100%;
   min-height: 100px;
 }
 
 @media (min-width: 641px) {
-  /* line 66, ../scss/app.scss */
+  /* line 72, ../scss/app.scss */
   .feedback-cont {
     position: fixed;
     bottom: 0;
     right: 3%;
   }
-  /* line 71, ../scss/app.scss */
+  /* line 77, ../scss/app.scss */
   .feedback-cont .buttons {
     position: absolute;
     bottom: 0;
     right: 0;
     height: 28px;
   }
-  /* line 77, ../scss/app.scss */
+  /* line 83, ../scss/app.scss */
   .feedback-cont .buttons button {
     height: 28px;
     border: none;
     width: 100%;
   }
-  /* line 85, ../scss/app.scss */
+  /* line 91, ../scss/app.scss */
   .feedback-cont .feedback-body {
     display: none;
     position: absolute;
@@ -96,26 +100,98 @@
   }
 }
 @media (max-width: 640px) {
-  /* line 99, ../scss/app.scss */
+  /* line 105, ../scss/app.scss */
   .feedback-cont {
-    position: static;
-    bottom: none;
+    position: relative;
+    bottom: 0;
     left: 0;
     width: 100%;
   }
-  /* line 105, ../scss/app.scss */
+  /* line 112, ../scss/app.scss */
   .feedback-cont .buttons {
     position: static;
   }
-  /* line 107, ../scss/app.scss */
+  /* line 114, ../scss/app.scss */
   .feedback-cont .buttons button {
     display: block;
   }
-  /* line 112, ../scss/app.scss */
+  /* line 119, ../scss/app.scss */
   .feedback-cont .feedback-body {
     position: static;
     bottom: none;
     right: none;
     width: 100%;
   }
+}
+/* line 128, ../scss/app.scss */
+.st-feedback {
+  position: fixed;
+  bottom: 0;
+  right: 2%;
+}
+/* line 133, ../scss/app.scss */
+.st-feedback .widget {
+  float: left;
+  margin-left: 1em;
+  width: 250px;
+}
+/* line 138, ../scss/app.scss */
+.st-feedback .widget .header {
+  position: relative;
+  background-color: #333;
+  padding: 3px 5px;
+  border-width: 1px 1px 0 1px;
+  border-style: solid;
+  border-color: #000;
+  color: #FFF;
+  height: 28px;
+  cursor: pointer;
+  border-radius: 0.3em 0.3em 0 0;
+  background-color: #333;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF333333', endColorstr='#FF1F1F1F');
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #1f1f1f));
+  background-image: -webkit-linear-gradient(top, #333333 0%, #1f1f1f 100%);
+  background-image: -moz-linear-gradient(top, #333333 0%, #1f1f1f 100%);
+  background-image: -o-linear-gradient(top, #333333 0%, #1f1f1f 100%);
+  background-image: linear-gradient(top, #333333 0%, #1f1f1f 100%);
+}
+/* line 155, ../scss/app.scss */
+.st-feedback .widget .header img {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  user-select: none;
+}
+/* line 162, ../scss/app.scss */
+.st-feedback .widget .header .title {
+  position: absolute;
+  top: 2px;
+  left: 35px;
+}
+/* line 168, ../scss/app.scss */
+.st-feedback .widget .header .close {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  display: none;
+  color: white;
+}
+/* line 177, ../scss/app.scss */
+.st-feedback .widget .body {
+  background-color: #FFF;
+  border-style: solid;
+  border-width: 0 1px;
+  border-color: #CCC;
+  min-height: 200px;
+  display: none;
+}
+/* line 185, ../scss/app.scss */
+.st-feedback .widget .body iframe {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  border: none;
+  outline: none;
+  height: 360px;
 }

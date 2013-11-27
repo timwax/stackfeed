@@ -54,60 +54,38 @@
 
 <script type="text/javascript" src="/packages/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/packages/prismjs/prism.js"></script>
-
 <script type="text/javascript">
-	var _feedback = _feedback || {};
-	_feedback.project = "{{Config::get('app.pid')}}";
-	_feedback.label = 'Feedback';
-	_feedback.host = "{{Config::get('app.hostname')}}";
+	jQuery.fn.extend({
+		getPath: function( path ) {
+			// The first time this function is called, path won't be defined.
+			if ( typeof path == 'undefined' ) path = '';
 
-	// Added options
+			// If this element is <html> we've reached the end of the path.
+			if ( this.is('html') )
+				return 'html' + path;
 
-	_feedback.type = 'inline'; // Type can be either (inline, popup, docked|default)
+			// Add the element name.
+			var cur = this.get(0).nodeName.toLowerCase();
 
-	/*
-	 * Feedback trigger
-	 *
-	 * This is the element responsible for toggling the feedback form
-	 */
-	_feedback.trigger = document.getElementById('feedback_trigger');
+			// Determine the IDs and path.
+			var id    = this.attr('id'),
+			    eclass = this.attr('class');
 
-	/*
-	 * Feedback Preload
-	 *
-	 * This may slow down webpage load speed, determines whether the iframe is loaded when the page 
-	 * loads or when the trigger button is clicked
-	 */
-	_feedback.preload = false;
 
-	/*
-	 * Feedback position
-	 *
-	 * Affects positioning of the feedback button on the browser window. This is only effective
-	 * on popup and docked modes
-	 */
-	_feedback.position = 'bottom left'; // Where to position feedback widget
+			// Add the #id if there is one.
+			if ( typeof id != 'undefined' )
+				cur += '#' + id;
 
-	/*
-	 * Feedback context
-	 *
-	 * When the setup of the widget begins, this determines the positioning of the feedback widget
-	 * in the DOM. This is essential in inline mode and favours small browsers
-	 */
-	
-	_feedback.context = document.getElementById('stack-feedback');
+			// Add any classes.
+			if ( typeof eclass != 'undefined' )
+				cur += '.' + eclass.split(/[\s\n]+/).join('.');
 
-	_feedback.init = function(){
-		this.protocal = 'https:' == window.location.protocal ? 'https://' : 'http://';
+			// Recurse up the DOM.
+			return this.parent().getPath( ' > ' + cur + path );
+		}
+	});
 
-		var fb = document.createElement('script'); 
-		fb.type = 'text/javascript'; 
-		fb.async = true; 
-		fb.src = this.protocal + this.host +'/fb.js';
-		document.body.appendChild(fb);
-	}
-
-	_feedback.init();
 </script>
+@include('include.feedback')
 </body>
 </html>

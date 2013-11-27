@@ -132,16 +132,17 @@
 }
 /* line 89, ../scss/dashboard.scss */
 .project-filters dt {
-  padding: 0.3em;
+  padding: 0.2em 0.5em;
   background-color: #EEE;
   margin-bottom: 1em;
+  font-weight: normal;
 }
-/* line 94, ../scss/dashboard.scss */
+/* line 97, ../scss/dashboard.scss */
 .project-filters ul {
   margin: 0;
   padding: 0;
 }
-/* line 98, ../scss/dashboard.scss */
+/* line 101, ../scss/dashboard.scss */
 .project-filters ul li {
   list-style-type: none;
   margin-left: 1em;

@@ -1,7 +1,7 @@
 services.factory('UI', function(){
 	return {
 		isAndroidBrowser : function(msg){
-			console.log('Here');
+			//console.log('Here');
 			if(!msg.info) return false;
 			return /android/ig.test(msg.info.browserFull);
 		},

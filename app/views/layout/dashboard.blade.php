@@ -33,17 +33,17 @@
 		</div>
 	</div>
 </header>
-	<div class="container">
-		<div class="row">
+
+<div class="container">
+	<div class="row">
 		<div class="col-sm-3">
 			@yield('sidebar')
 		</div>
 		<div class="col-sm-8 col-sm-push-1">
 			<div ng-view>@yield('content')</div>
 		</div>
-		</div>
-		
 	</div>
+</div>
 
 <footer>
 	<div class="row">
